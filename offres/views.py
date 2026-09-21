@@ -1,10 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from .donnees import offres_actives, offre_par_slug
+from .models import Offre
 
 # Create your views here.
 def nouvelles(request):
-    list_offres_actives = offres_actives()
+    list_offres_actives = Offre.objects.filter(active=True)
     return render(request, 'offres/liste_offres.html', {
         "offres": list_offres_actives,
         "total": len(list_offres_actives)
