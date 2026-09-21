@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mes candidatures — DakarTech Jobs</title>
+  <meta name="description" content="Suivez l'état de vos candidatures sur DakarTech Jobs : envoyée, en cours, entretien, acceptée.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <!-- ====================================================================
+       HEADER — commun à toutes les pages (→ templates/base.html)
+       ==================================================================== -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html">
+        <img class="brand__mark" src="assets/logo.svg" alt="" width="36" height="36">
+        <span class="brand__name">DakarTech<strong>Jobs</strong></span>
+      </a>
+
+      <button class="nav-toggle" type="button" data-toggle="nav" aria-controls="site-nav" aria-expanded="false" aria-label="Ouvrir le menu">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Navigation principale">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="index.html">Accueil</a></li>
+          <li><a class="site-nav__link" href="offres.html">Offres</a></li>
+          <li><a class="site-nav__link" href="entreprises.html">Entreprises</a></li>
+          <li><a class="site-nav__link" href="contact.html">Contact</a></li>
+        </ul>
+
+        <!-- Variante « utilisateur connecté » des actions du header.
+             En Django : {% if user.is_authenticated %} … le menu ci-dessous … -->
+        <div class="site-nav__actions">
+          <div class="dropdown" data-dropdown>
+            <button class="user-menu" type="button" data-dropdown-toggle aria-expanded="false" aria-haspopup="true">
+              <span class="avatar avatar--sm avatar--round avatar--pink" aria-hidden="true">AD</span>
+              Aminata Diop
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="dropdown__menu">
+              <!-- {{ user.get_full_name }} / {{ user.email }} -->
+              <div class="dropdown__head">
+                <strong>Aminata Diop</strong>
+                aminata.diop@exemple.sn
+              </div>
+              <a class="dropdown__item" href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Mon profil
+              </a>
+              <a class="dropdown__item" href="candidatures.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+                Mes candidatures
+              </a>
+              <a class="dropdown__item" href="#">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                Paramètres
+              </a>
+              <div class="dropdown__sep"></div>
+              <!-- Déconnexion : en Django, LogoutView attend un POST → <form method="post">{% csrf_token %}<button>…</button></form> -->
+              <a class="dropdown__item dropdown__item--danger" href="connexion.html">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+                Déconnexion
+              </a>
+            </div>
+          </div>
+        </div>
+        <!-- {% else %} : les deux boutons « Connexion » et « Créer un compte » de index.html
+             {% endif %} -->
+      </nav>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       CONTENU DE LA PAGE (→ {% block content %})
+       Vue protégée : @login_required sur la vue mes_candidatures.
+       ==================================================================== -->
+  <main id="main">
+
+    <!-- En-tête du tableau de bord (fond teinté clair) -->
+    <section class="page-head">
+      <div class="container">
+        <div class="dash-head">
+          <h1>Mes candidatures</h1>
+          <a class="btn btn--primary" href="offres.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            Trouver une offre
+          </a>
+        </div>
+        <!-- {{ user.first_name }} -->
+        <p class="page-head__lead">Bonjour Aminata, voici l'état de vos candidatures.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+
+        <!-- Messages Django (django.contrib.messages) :
+             {% for message in messages %}
+               <li class="alert alert--{{ message.tags }}">…</li>
+             {% endfor %} -->
+        <ul class="messages">
+          <li class="alert alert--success" role="status">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+            <div class="alert__body">
+              <strong class="alert__title">Candidature envoyée</strong>
+              <p>Votre candidature au poste Développeur Django chez Baamtu a bien été transmise.</p>
+            </div>
+            <button class="alert__close" type="button" data-dismiss="alert" aria-label="Fermer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+          </li>
+        </ul>
+
+        <!-- Chiffres clés : {{ candidatures.count }}, puis un .count() par statut (ou annotate) -->
+        <div class="grid grid--4 mb-8">
+          <div class="stat stat--sky">
+            <p class="stat__value">8</p>
+            <p class="stat__label">candidatures</p>
+          </div>
+          <div class="stat stat--blue">
+            <p class="stat__value">3</p>
+            <p class="stat__label">en cours</p>
+          </div>
+          <div class="stat stat--amber">
+            <p class="stat__value">2</p>
+            <p class="stat__label">entretiens</p>
+          </div>
+          <div class="stat stat--green">
+            <p class="stat__value">1</p>
+            <p class="stat__label">acceptée</p>
+          </div>
+        </div>
+
+        <!-- Onglets (js/theme.js). En Django, un filtre ?statut=… sur la vue suffit :
+             candidatures.filter(statut="en_cours") -->
+        <div class="tabs mb-6" data-tabs role="tablist" aria-label="Filtrer les candidatures">
+          <button class="tabs__tab" type="button" role="tab" id="tab-toutes" data-tab="toutes" aria-selected="true" aria-controls="panel-toutes">
+            Toutes <span class="badge badge--primary">8</span>
+          </button>
+          <button class="tabs__tab" type="button" role="tab" id="tab-en-cours" data-tab="en-cours" aria-selected="false" aria-controls="panel-en-cours">
+            En cours <span class="badge badge--blue">3</span>
+          </button>
+          <button class="tabs__tab" type="button" role="tab" id="tab-entretiens" data-tab="entretiens" aria-selected="false" aria-controls="panel-entretiens">
+            Entretiens <span class="badge badge--amber">2</span>
+          </button>
+          <button class="tabs__tab" type="button" role="tab" id="tab-archivees" data-tab="archivees" aria-selected="false" aria-controls="panel-archivees">
+            Archivées <span class="badge">0</span>
+          </button>
+        </div>
+
+        <!-- Panneau « Toutes » -->
+        <div class="tab-panel" id="panel-toutes" data-tab-panel="toutes" role="tabpanel" aria-labelledby="tab-toutes">
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Offre</th>
+                  <th scope="col">Ville</th>
+                  <th scope="col">Envoyée le</th>
+                  <th scope="col">Statut</th>
+                  <th scope="col" class="cell-actions">Actions</th>
+                </tr>
+              </thead>
+              <!-- Une ligne par candidature : {% for candidature in candidatures %} … {% endfor %} -->
+              <tbody>
+                <tr>
+                  <!-- {% url 'detail_offre' candidature.offre.id %} -->
+                  <td>
+                    <div class="cell-primary">
+                      <span class="avatar avatar--sm avatar--green" aria-hidden="true">Ba</span>
+                      <div>
+                        <a href="offre.html">Développeur Django</a><br>
+                        <span class="small muted">Baamtu</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Dakar</td>
+                  <!-- {{ candidature.date_envoi|date }} -->
+                  <td class="cell-muted"><time datetime="2026-09-18">18 sept. 2026</time></td>
+                  <td><span class="badge badge--dot badge--sky">Envoyée</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn--ghost btn--sm" href="offre.html">Voir</a>
+                    <!-- « Retirer » modifie des données : en Django, un <form method="post">{% csrf_token %}…</form> -->
+                    <button class="btn btn--ghost btn--sm btn--icon" type="button" aria-label="Retirer">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-primary">
+                      <span class="avatar avatar--sm avatar--amber" aria-hidden="true">Ga</span>
+                      <div>
+                        <a href="offre.html">Data Engineer</a><br>
+                        <span class="small muted">Gaïndé 2000</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Dakar</td>
+                  <td class="cell-muted"><time datetime="2026-09-15">15 sept. 2026</time></td>
+                  <td><span class="badge badge--dot badge--sky">Envoyée</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn--ghost btn--sm" href="offre.html">Voir</a>
+                    <button class="btn btn--ghost btn--sm btn--icon" type="button" aria-label="Retirer">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-primary">
+                      <span class="avatar avatar--sm avatar--blue" aria-hidden="true">So</span>
+                      <div>
+                        <a href="offre.html">Développeur Laravel</a><br>
+                        <span class="small muted">Sonatel</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Dakar</td>
+                  <td class="cell-muted"><time datetime="2026-09-10">10 sept. 2026</time></td>
+                  <td><span class="badge badge--dot badge--blue">En cours</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn--ghost btn--sm" href="offre.html">Voir</a>
+                    <button class="btn btn--ghost btn--sm btn--icon" type="button" aria-label="Retirer">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-primary">
+                      <span class="avatar avatar--sm avatar--amber" aria-hidden="true">Ey</span>
+                      <div>
+                        <a href="offre.html">Développeur NestJS</a><br>
+                        <span class="small muted">Eyone</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Dakar</td>
+                  <td class="cell-muted"><time datetime="2026-09-08">8 sept. 2026</time></td>
+                  <td><span class="badge badge--dot badge--amber">Entretien</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn--ghost btn--sm" href="offre.html">Voir</a>
+                    <button class="btn btn--ghost btn--sm btn--icon" type="button" aria-label="Retirer">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-primary">
+                      <span class="avatar avatar--sm avatar--pink" aria-hidden="true">Ya</span>
+                      <div>
+                        <a href="offre.html">Développeur Angular</a><br>
+                        <span class="small muted">Yas</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Dakar</td>
+                  <td class="cell-muted"><time datetime="2026-09-04">4 sept. 2026</time></td>
+                  <td><span class="badge badge--dot badge--blue">En cours</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn--ghost btn--sm" href="offre.html">Voir</a>
+                    <button class="btn btn--ghost btn--sm btn--icon" type="button" aria-label="Retirer">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-primary">
+                      <span class="avatar avatar--sm avatar--blue" aria-hidden="true">Ex</span>
+                      <div>
+                        <a href="offre.html">Développeur Flutter</a><br>
+                        <span class="small muted">Expresso</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Thiès</td>
+                  <td class="cell-muted"><time datetime="2026-09-01">1<sup>er</sup> sept. 2026</time></td>
+                  <td><span class="badge badge--dot badge--blue">En cours</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn--ghost btn--sm" href="offre.html">Voir</a>
+                    <button class="btn btn--ghost btn--sm btn--icon" type="button" aria-label="Retirer">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-primary">
+                      <span class="avatar avatar--sm avatar--green" aria-hidden="true">Sn</span>
+                      <div>
+                        <a href="offre.html">Ingénieur DevOps</a><br>
+                        <span class="small muted">Sénégal Numérique</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Diamniadio</td>
+                  <td class="cell-muted"><time datetime="2026-08-26">26 août 2026</time></td>
+                  <td><span class="badge badge--dot badge--amber">Entretien</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn--ghost btn--sm" href="offre.html">Voir</a>
+                    <button class="btn btn--ghost btn--sm btn--icon" type="button" aria-label="Retirer">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-primary">
+                      <span class="avatar avatar--sm avatar--sky" aria-hidden="true">Wa</span>
+                      <div>
+                        <a href="offre.html">Data Analyst</a><br>
+                        <span class="small muted">Wave</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Dakar</td>
+                  <td class="cell-muted"><time datetime="2026-08-18">18 août 2026</time></td>
+                  <td><span class="badge badge--dot badge--green">Acceptée</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn--ghost btn--sm" href="offre.html">Voir</a>
+                    <button class="btn btn--ghost btn--sm btn--icon" type="button" aria-label="Retirer">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+              <!-- {% empty %} : quand la liste est vide, remplacer le .table-wrap par le bloc .empty
+                   (voir l'onglet « Archivées » plus bas) -->
+            </table>
+          </div>
+        </div>
+
+        <!-- Panneau « En cours » (masqué au chargement : attribut hidden) -->
+        <div class="tab-panel" id="panel-en-cours" data-tab-panel="en-cours" role="tabpanel" aria-labelledby="tab-en-cours" hidden>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Offre</th>
+                  <th scope="col">Ville</th>
+                  <th scope="col">Envoyée le</th>
+                  <th scope="col">Statut</th>
+                  <th scope="col" class="cell-actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="cell-primary">
+                      <span class="avatar avatar--sm avatar--blue" aria-hidden="true">So</span>
+                      <div>
+                        <a href="offre.html">Développeur Laravel</a><br>
+                        <span class="small muted">Sonatel</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Dakar</td>
+                  <td class="cell-muted"><time datetime="2026-09-10">10 sept. 2026</time></td>
+                  <td><span class="badge badge--dot badge--blue">En cours</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn--ghost btn--sm" href="offre.html">Voir</a>
+                    <button class="btn btn--ghost btn--sm btn--icon" type="button" aria-label="Retirer">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-primary">
+                      <span class="avatar avatar--sm avatar--pink" aria-hidden="true">Ya</span>
+                      <div>
+                        <a href="offre.html">Développeur Angular</a><br>
+                        <span class="small muted">Yas</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Dakar</td>
+                  <td class="cell-muted"><time datetime="2026-09-04">4 sept. 2026</time></td>
+                  <td><span class="badge badge--dot badge--blue">En cours</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn--ghost btn--sm" href="offre.html">Voir</a>
+                    <button class="btn btn--ghost btn--sm btn--icon" type="button" aria-label="Retirer">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-primary">
+                      <span class="avatar avatar--sm avatar--blue" aria-hidden="true">Ex</span>
+                      <div>
+                        <a href="offre.html">Développeur Flutter</a><br>
+                        <span class="small muted">Expresso</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Thiès</td>
+                  <td class="cell-muted"><time datetime="2026-09-01">1<sup>er</sup> sept. 2026</time></td>
+                  <td><span class="badge badge--dot badge--blue">En cours</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn--ghost btn--sm" href="offre.html">Voir</a>
+                    <button class="btn btn--ghost btn--sm btn--icon" type="button" aria-label="Retirer">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Panneau « Entretiens » : une colonne « Date d'entretien » en plus -->
+        <div class="tab-panel" id="panel-entretiens" data-tab-panel="entretiens" role="tabpanel" aria-labelledby="tab-entretiens" hidden>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Offre</th>
+                  <th scope="col">Ville</th>
+                  <th scope="col">Envoyée le</th>
+                  <th scope="col">Date d'entretien</th>
+                  <th scope="col">Statut</th>
+                  <th scope="col" class="cell-actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="cell-primary">
+                      <span class="avatar avatar--sm avatar--amber" aria-hidden="true">Ey</span>
+                      <div>
+                        <a href="offre.html">Développeur NestJS</a><br>
+                        <span class="small muted">Eyone</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Dakar</td>
+                  <td class="cell-muted"><time datetime="2026-09-08">8 sept. 2026</time></td>
+                  <!-- {{ candidature.date_entretien|date:"j F Y à H\hi" }} -->
+                  <td><strong><time datetime="2026-09-22T10:00">22 sept. 2026</time></strong> <span class="muted">à 10h00</span></td>
+                  <td><span class="badge badge--dot badge--amber">Entretien</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn--ghost btn--sm" href="offre.html">Voir</a>
+                    <button class="btn btn--ghost btn--sm btn--icon" type="button" aria-label="Retirer">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="cell-primary">
+                      <span class="avatar avatar--sm avatar--green" aria-hidden="true">Sn</span>
+                      <div>
+                        <a href="offre.html">Ingénieur DevOps</a><br>
+                        <span class="small muted">Sénégal Numérique</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>Diamniadio</td>
+                  <td class="cell-muted"><time datetime="2026-08-26">26 août 2026</time></td>
+                  <td><strong><time datetime="2026-09-24T14:30">24 sept. 2026</time></strong> <span class="muted">à 14h30</span></td>
+                  <td><span class="badge badge--dot badge--amber">Entretien</span></td>
+                  <td class="cell-actions">
+                    <a class="btn btn--ghost btn--sm" href="offre.html">Voir</a>
+                    <button class="btn btn--ghost btn--sm btn--icon" type="button" aria-label="Retirer">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Panneau « Archivées » : état vide (→ le bloc {% empty %} d'un {% for %}) -->
+        <div class="tab-panel" id="panel-archivees" data-tab-panel="archivees" role="tabpanel" aria-labelledby="tab-archivees" hidden>
+          <div class="empty">
+            <span class="icon-box icon-box--lg icon-box--pink" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></svg>
+            </span>
+            <h3>Aucune candidature archivée</h3>
+            <p>Les candidatures que vous retirez ou dont l'offre est clôturée apparaîtront ici.</p>
+            <a class="btn btn--outline" href="offres.html">Voir les offres</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       FOOTER — commun à toutes les pages (→ templates/base.html)
+       ==================================================================== -->
+  <footer class="site-footer on-dark">
+    <div class="container site-footer__inner">
+      <div>
+        <a class="brand" href="index.html">
+          <img class="brand__mark" src="assets/logo.svg" alt="" width="36" height="36">
+          <span class="brand__name">DakarTech<strong>Jobs</strong></span>
+        </a>
+        <p class="site-footer__about">
+          La plateforme d'emploi dédiée aux métiers du numérique au Sénégal.
+          Projet pédagogique réalisé avec Django.
+        </p>
+      </div>
+      <div>
+        <h3 class="site-footer__title">Candidats</h3>
+        <ul class="site-footer__links">
+          <li><a href="offres.html">Toutes les offres</a></li>
+          <li><a href="entreprises.html">Entreprises</a></li>
+          <li><a href="inscription.html">Créer un compte</a></li>
+          <li><a href="candidatures.html">Mes candidatures</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="site-footer__title">Recruteurs</h3>
+        <ul class="site-footer__links">
+          <li><a href="inscription.html">Publier une offre</a></li>
+          <li><a href="contact.html">Nous contacter</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="site-footer__title">À propos</h3>
+        <ul class="site-footer__links">
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Mentions légales</a></li>
+          <li><a href="#">Confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom-wrap">
+      <div class="container site-footer__bottom">
+        <span>© 2026 DakarTech Jobs — Dakar Institute of Technology</span>
+        <span class="cluster">
+          <a href="#">Mentions légales</a>
+          <a href="#">Confidentialité</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+</body>
+</html>

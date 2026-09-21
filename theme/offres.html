@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Offres d'emploi — DakarTech Jobs</title>
+  <meta name="description" content="Toutes les offres d'emploi tech au Sénégal : CDI, CDD, stages, freelance et alternance, de Dakar à Saint-Louis.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <!-- ====================================================================
+       HEADER — commun à toutes les pages (→ templates/base.html)
+       ==================================================================== -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html">
+        <img class="brand__mark" src="assets/logo.svg" alt="" width="36" height="36">
+        <span class="brand__name">DakarTech<strong>Jobs</strong></span>
+      </a>
+
+      <button class="nav-toggle" type="button" data-toggle="nav" aria-controls="site-nav" aria-expanded="false" aria-label="Ouvrir le menu">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Navigation principale">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="index.html">Accueil</a></li>
+          <li><a class="site-nav__link is-active" href="offres.html" aria-current="page">Offres</a></li>
+          <li><a class="site-nav__link" href="entreprises.html">Entreprises</a></li>
+          <li><a class="site-nav__link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="site-nav__actions">
+          <a class="btn btn--ghost" href="connexion.html">Connexion</a>
+          <a class="btn btn--primary" href="inscription.html">Créer un compte</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       CONTENU DE LA PAGE (→ {% block content %})
+       Vue Django : liste_offres (et offres_par_ville quand ?ville=… est présent)
+       ==================================================================== -->
+  <main id="main">
+
+    <!-- En-tête de page sombre : même dégradé « marque » que le hero, plus compact -->
+    <section class="page-head page-head--dark on-dark">
+      <div class="container">
+        <span class="kicker">Offres d'emploi</span>
+        <!-- {{ offres.count }} ou page_obj.paginator.count -->
+        <h1 class="page-head__title">128 offres tech au Sénégal</h1>
+        <p class="page-head__lead">
+          Développement web et mobile, data, DevOps, design : toutes les offres publiées
+          par les entreprises tech du pays, mises à jour chaque jour.
+        </p>
+
+        <!-- Recherche : <form method="get" action="{% url 'liste_offres' %}"> -->
+        <form class="search-bar mt-8" action="offres.html" method="get" role="search">
+          <label class="search-bar__field">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <span class="sr-only">Poste, technologie ou entreprise</span>
+            <!-- value="{{ request.GET.q }}" -->
+            <input type="search" name="q" placeholder="Poste, technologie, entreprise…" autocomplete="off">
+          </label>
+          <label class="search-bar__field search-bar__field--select">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span class="sr-only">Ville</span>
+            <select name="ville">
+              <option value="">Toutes les villes</option>
+              <option value="dakar" selected>Dakar</option>
+              <option value="thies">Thiès</option>
+              <option value="saint-louis">Saint-Louis</option>
+              <option value="diamniadio">Diamniadio</option>
+              <option value="mbour">Mbour</option>
+              <option value="ziguinchor">Ziguinchor</option>
+            </select>
+          </label>
+          <button class="btn btn--primary btn--lg" type="submit">Rechercher</button>
+        </form>
+
+        <!-- Filtre rapide par ville (→ {% url 'offres_par_ville' ville.slug %}) ; la ville courante porte .is-active -->
+        <div class="cluster cluster--sm mt-6">
+          <span class="small">Par ville :</span>
+          <a class="chip" href="offres.html">Toutes</a>
+          <a class="chip is-active" href="offres.html?ville=dakar" aria-current="true">Dakar</a>
+          <a class="chip" href="offres.html?ville=thies">Thiès</a>
+          <a class="chip" href="offres.html?ville=saint-louis">Saint-Louis</a>
+          <a class="chip" href="offres.html?ville=diamniadio">Diamniadio</a>
+          <a class="chip" href="offres.html?ville=mbour">Mbour</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Liste + filtres : barre latérale à gauche, résultats à droite -->
+    <section class="section">
+      <div class="container">
+        <div class="layout-sidebar">
+
+          <!-- ============ FILTRES (barre latérale) ============ -->
+          <aside class="sidebar stack" aria-label="Filtres de recherche">
+            <!-- Visible uniquement sur mobile : ouvre / ferme le panneau (js/theme.js) -->
+            <button class="btn btn--outline btn--block filters-toggle" type="button" data-toggle="filters" aria-controls="filters-panel" aria-expanded="false">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 4h-7"/><path d="M10 4H3"/><path d="M21 12h-9"/><path d="M8 12H3"/><path d="M21 20h-5"/><path d="M12 20H3"/><path d="M14 2v4"/><path d="M8 10v4"/><path d="M16 18v4"/></svg>
+              Filtres
+            </button>
+
+            <div id="filters-panel" class="filters-panel">
+              <!-- Les filtres sont envoyés en GET : la vue lit request.GET.getlist('contrat'), etc. -->
+              <form class="filters card card--tinted" method="get" action="offres.html">
+                <div class="filters__head">
+                  <h2>Filtres</h2>
+                  <!-- Lien vers la liste sans paramètre : {% url 'liste_offres' %} -->
+                  <a class="btn btn--ghost btn--sm" href="offres.html">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                    Réinitialiser
+                  </a>
+                </div>
+
+                <!-- Type de contrat (→ {% for type, nb in types_contrat %}) -->
+                <div class="filters__group" role="group" aria-labelledby="filtre-contrat">
+                  <h3 class="filters__title" id="filtre-contrat">Type de contrat</h3>
+                  <label class="form-check">
+                    <input type="checkbox" name="contrat" value="cdi" checked>
+                    <span>CDI</span>
+                    <span class="form-check__count">64</span>
+                  </label>
+                  <label class="form-check">
+                    <input type="checkbox" name="contrat" value="cdd">
+                    <span>CDD</span>
+                    <span class="form-check__count">22</span>
+                  </label>
+                  <label class="form-check">
+                    <input type="checkbox" name="contrat" value="stage">
+                    <span>Stage</span>
+                    <span class="form-check__count">18</span>
+                  </label>
+                  <label class="form-check">
+                    <input type="checkbox" name="contrat" value="freelance">
+                    <span>Freelance</span>
+                    <span class="form-check__count">14</span>
+                  </label>
+                  <label class="form-check">
+                    <input type="checkbox" name="contrat" value="alternance">
+                    <span>Alternance</span>
+                    <span class="form-check__count">10</span>
+                  </label>
+                </div>
+
+                <!-- Ville (→ {% for ville in villes %}) -->
+                <div class="filters__group" role="group" aria-labelledby="filtre-ville">
+                  <h3 class="filters__title" id="filtre-ville">Ville</h3>
+                  <label class="form-check">
+                    <input type="checkbox" name="ville" value="dakar" checked>
+                    <span>Dakar</span>
+                    <span class="form-check__count">84</span>
+                  </label>
+                  <label class="form-check">
+                    <input type="checkbox" name="ville" value="thies">
+                    <span>Thiès</span>
+                    <span class="form-check__count">12</span>
+                  </label>
+                  <label class="form-check">
+                    <input type="checkbox" name="ville" value="saint-louis">
+                    <span>Saint-Louis</span>
+                    <span class="form-check__count">9</span>
+                  </label>
+                  <label class="form-check">
+                    <input type="checkbox" name="ville" value="diamniadio">
+                    <span>Diamniadio</span>
+                    <span class="form-check__count">7</span>
+                  </label>
+                  <label class="form-check">
+                    <input type="checkbox" name="ville" value="mbour">
+                    <span>Mbour</span>
+                    <span class="form-check__count">6</span>
+                  </label>
+                  <label class="form-check">
+                    <input type="checkbox" name="ville" value="ziguinchor">
+                    <span>Ziguinchor</span>
+                    <span class="form-check__count">4</span>
+                  </label>
+                </div>
+
+                <!-- Mode de travail -->
+                <div class="filters__group" role="group" aria-labelledby="filtre-mode">
+                  <h3 class="filters__title" id="filtre-mode">Mode de travail</h3>
+                  <label class="form-check">
+                    <input type="checkbox" name="mode" value="sur-site">
+                    <span>Sur site</span>
+                    <span class="form-check__count">58</span>
+                  </label>
+                  <label class="form-check">
+                    <input type="checkbox" name="mode" value="hybride">
+                    <span>Hybride</span>
+                    <span class="form-check__count">44</span>
+                  </label>
+                  <label class="form-check">
+                    <input type="checkbox" name="mode" value="teletravail">
+                    <span>Télétravail</span>
+                    <span class="form-check__count">26</span>
+                  </label>
+                </div>
+
+                <!-- Salaire minimum : la valeur s'affiche dans <output> grâce à data-range-output (js/theme.js) -->
+                <div class="filters__group">
+                  <label class="filters__title" for="salaire-min">Salaire minimum</label>
+                  <input type="range" id="salaire-min" name="salaire_min" min="100000" max="2000000" step="50000" value="500000" data-range-output="salaire-out">
+                  <div class="filters__range-values">
+                    <span>À partir de</span>
+                    <output class="fw-bold" id="salaire-out" for="salaire-min">500&nbsp;000 FCFA</output>
+                  </div>
+                </div>
+
+                <!-- Entreprise (→ {% for entreprise in entreprises %}<option value="{{ entreprise.id }}">) -->
+                <div class="filters__group">
+                  <label class="filters__title" for="filtre-entreprise">Entreprise</label>
+                  <select class="form-control" id="filtre-entreprise" name="entreprise">
+                    <option value="">Toutes les entreprises</option>
+                    <option value="atos-senegal">Atos Sénégal</option>
+                    <option value="baamtu">Baamtu</option>
+                    <option value="expresso">Expresso</option>
+                    <option value="eyone">Eyone</option>
+                    <option value="gainde-2000">Gaïndé 2000</option>
+                    <option value="orange-digital-center">Orange Digital Center</option>
+                    <option value="senegal-numerique">Sénégal Numérique</option>
+                    <option value="sonatel">Sonatel</option>
+                    <option value="wave">Wave</option>
+                    <option value="yas">Yas</option>
+                  </select>
+                </div>
+
+                <div class="form-actions">
+                  <button class="btn btn--primary btn--block" type="submit">Appliquer les filtres</button>
+                </div>
+              </form>
+            </div>
+          </aside>
+
+          <!-- ============ RÉSULTATS ============ -->
+          <div>
+            <h2 class="sr-only">Résultats de la recherche</h2>
+
+            <div class="results-bar">
+              <!-- {{ page_obj.paginator.count }} -->
+              <p class="results-bar__count"><strong>128</strong> offres trouvées</p>
+              <!-- Tri : soumis en GET (→ request.GET.get('tri')) ; theme.js soumet le formulaire au changement -->
+              <form class="results-bar__sort" method="get" action="offres.html">
+                <label for="tri">Trier par</label>
+                <select class="form-control form-control--sm" id="tri" name="tri" data-autosubmit>
+                  <option value="recentes" selected>Plus récentes</option>
+                  <option value="salaire-desc">Salaire décroissant</option>
+                  <option value="salaire-asc">Salaire croissant</option>
+                </select>
+              </form>
+            </div>
+
+            <!-- Filtres actifs : chaque chip retire son filtre (lien vers la même liste sans ce paramètre) -->
+            <div class="cluster cluster--sm mb-6">
+              <span class="small muted">Filtres actifs :</span>
+              <a class="chip is-active" href="offres.html?contrat=cdi" aria-label="Retirer le filtre Dakar">
+                Dakar
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              </a>
+              <a class="chip is-active" href="offres.html?ville=dakar" aria-label="Retirer le filtre CDI">
+                CDI
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              </a>
+              <a class="btn btn--ghost btn--sm" href="offres.html">Tout effacer</a>
+            </div>
+
+            <!-- Une carte par offre (→ {% for offre in page_obj %}) -->
+            <div class="offres-list">
+
+              <article class="card card--outlined card--interactive offre-card">
+                <!-- Couleur d'avatar : {% cycle 'green' 'blue' 'amber' 'pink' 'sky' %} -->
+                <div class="avatar avatar--green" aria-hidden="true">Ba</div>
+                <div>
+                  <!-- href="{% url 'detail_offre' offre.id %}" -->
+                  <h3 class="offre-card__title"><a class="stretched-link" href="offre.html">Développeur Django</a></h3>
+                  <p class="offre-card__meta">
+                    <span><a href="entreprise.html">Baamtu</a></span>
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Dakar</span>
+                    <!-- {{ offre.date_publication|timesince }} -->
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Il y a 2 jours</span>
+                  </p>
+                  <ul class="offre-card__tags">
+                    <li class="badge badge--green">CDI</li>
+                    <li class="badge">Hybride</li>
+                    <li class="badge badge--outline">Django</li>
+                    <li class="badge badge--outline">PostgreSQL</li>
+                  </ul>
+                  <!-- {{ offre.description|truncatewords:25 }} -->
+                  <p class="offre-card__desc">Rejoignez l'équipe produit pour concevoir des API REST et des applications métier destinées à nos clients du secteur bancaire.</p>
+                </div>
+                <div class="offre-card__aside">
+                  <!-- {{ offre.salaire|intcomma }} -->
+                  <p class="offre-card__salary">750&nbsp;000 <span>FCFA / mois</span></p>
+                  <!-- {{ offre.date_publication|date:"j M Y" }} -->
+                  <p class="offre-card__date">Publiée le 16 sept. 2026</p>
+                </div>
+              </article>
+
+              <article class="card card--outlined card--interactive offre-card">
+                <div class="avatar avatar--blue" aria-hidden="true">So</div>
+                <div>
+                  <h3 class="offre-card__title"><a class="stretched-link" href="offre.html">Développeur Laravel</a></h3>
+                  <p class="offre-card__meta">
+                    <span><a href="entreprise.html">Sonatel</a></span>
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Dakar</span>
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Il y a 3 jours</span>
+                  </p>
+                  <ul class="offre-card__tags">
+                    <li class="badge badge--green">CDI</li>
+                    <li class="badge">Sur site</li>
+                    <li class="badge badge--outline">Laravel</li>
+                    <li class="badge badge--outline">MySQL</li>
+                  </ul>
+                  <p class="offre-card__desc">Développement et maintenance des portails clients de l'opérateur, en lien étroit avec les équipes réseau et facturation.</p>
+                </div>
+                <div class="offre-card__aside">
+                  <p class="offre-card__salary">1&nbsp;200&nbsp;000 <span>FCFA / mois</span></p>
+                  <p class="offre-card__date">Publiée le 15 sept. 2026</p>
+                </div>
+              </article>
+
+              <article class="card card--outlined card--interactive offre-card">
+                <div class="avatar avatar--amber" aria-hidden="true">Ey</div>
+                <div>
+                  <h3 class="offre-card__title"><a class="stretched-link" href="offre.html">Développeur NestJS</a></h3>
+                  <p class="offre-card__meta">
+                    <span><a href="entreprise.html">Eyone</a></span>
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Dakar</span>
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Il y a 5 jours</span>
+                  </p>
+                  <ul class="offre-card__tags">
+                    <li class="badge badge--blue">CDD</li>
+                    <li class="badge">Télétravail</li>
+                    <li class="badge badge--outline">NestJS</li>
+                    <li class="badge badge--outline">TypeScript</li>
+                  </ul>
+                  <p class="offre-card__desc">Construisez les microservices de notre plateforme e-santé, utilisée aujourd'hui dans plus de 60 structures médicales au Sénégal.</p>
+                </div>
+                <div class="offre-card__aside">
+                  <p class="offre-card__salary">1&nbsp;200&nbsp;000 <span>FCFA / mois</span></p>
+                  <p class="offre-card__date">Publiée le 13 sept. 2026</p>
+                </div>
+              </article>
+
+              <article class="card card--outlined card--interactive offre-card">
+                <div class="avatar avatar--pink" aria-hidden="true">Ya</div>
+                <div>
+                  <h3 class="offre-card__title"><a class="stretched-link" href="offre.html">Développeur Angular</a></h3>
+                  <p class="offre-card__meta">
+                    <span><a href="entreprise.html">Yas</a></span>
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Dakar</span>
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Il y a 6 jours</span>
+                  </p>
+                  <ul class="offre-card__tags">
+                    <li class="badge badge--green">CDI</li>
+                    <li class="badge">Hybride</li>
+                    <li class="badge badge--outline">Angular</li>
+                    <li class="badge badge--outline">RxJS</li>
+                  </ul>
+                  <p class="offre-card__desc">Vous prenez en charge le front-end de l'application mobile money et de son espace marchand, utilisés par des millions de clients.</p>
+                </div>
+                <div class="offre-card__aside">
+                  <p class="offre-card__salary">850&nbsp;000 <span>FCFA / mois</span></p>
+                  <p class="offre-card__date">Publiée le 12 sept. 2026</p>
+                </div>
+              </article>
+
+              <article class="card card--outlined card--interactive offre-card">
+                <div class="avatar avatar--sky" aria-hidden="true">Wa</div>
+                <div>
+                  <h3 class="offre-card__title"><a class="stretched-link" href="offre.html">Data Analyst</a></h3>
+                  <p class="offre-card__meta">
+                    <span><a href="entreprise.html">Wave</a></span>
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Dakar</span>
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Il y a 1 semaine</span>
+                  </p>
+                  <ul class="offre-card__tags">
+                    <li class="badge badge--amber">Stage</li>
+                    <li class="badge">Sur site</li>
+                    <li class="badge badge--outline">SQL</li>
+                    <li class="badge badge--outline">Python</li>
+                  </ul>
+                  <p class="offre-card__desc">Stage de 6 mois au sein de l'équipe Data : tableaux de bord, analyses d'usage et contrôle de la qualité des données.</p>
+                </div>
+                <div class="offre-card__aside">
+                  <p class="offre-card__salary">250&nbsp;000 <span>FCFA / mois</span></p>
+                  <p class="offre-card__date">Publiée le 11 sept. 2026</p>
+                </div>
+              </article>
+
+              <article class="card card--outlined card--interactive offre-card">
+                <div class="avatar avatar--green" aria-hidden="true">Sn</div>
+                <div>
+                  <h3 class="offre-card__title"><a class="stretched-link" href="offre.html">Ingénieur DevOps</a></h3>
+                  <p class="offre-card__meta">
+                    <span><a href="entreprise.html">Sénégal Numérique</a></span>
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Diamniadio</span>
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Il y a 1 semaine</span>
+                  </p>
+                  <ul class="offre-card__tags">
+                    <li class="badge badge--pink">Freelance</li>
+                    <li class="badge">Télétravail</li>
+                    <li class="badge badge--outline">Docker</li>
+                    <li class="badge badge--outline">Kubernetes</li>
+                  </ul>
+                  <p class="offre-card__desc">Mission de 6 mois : industrialiser le déploiement des services publics numériques (intégration continue, supervision, sauvegardes).</p>
+                </div>
+                <div class="offre-card__aside">
+                  <p class="offre-card__salary">1&nbsp;500&nbsp;000 <span>FCFA / mois</span></p>
+                  <p class="offre-card__date">Publiée le 10 sept. 2026</p>
+                </div>
+              </article>
+
+              <article class="card card--outlined card--interactive offre-card">
+                <div class="avatar avatar--blue" aria-hidden="true">Ex</div>
+                <div>
+                  <h3 class="offre-card__title"><a class="stretched-link" href="offre.html">Développeur Flutter</a></h3>
+                  <p class="offre-card__meta">
+                    <span><a href="entreprise.html">Expresso</a></span>
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Thiès</span>
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Il y a 10 jours</span>
+                  </p>
+                  <ul class="offre-card__tags">
+                    <li class="badge badge--sky">Alternance</li>
+                    <li class="badge">Hybride</li>
+                    <li class="badge badge--outline">Flutter</li>
+                    <li class="badge badge--outline">Dart</li>
+                  </ul>
+                  <p class="offre-card__desc">Alternance de 12 mois pour développer l'application selfcare Android et iOS de l'opérateur, du prototype à la publication.</p>
+                </div>
+                <div class="offre-card__aside">
+                  <p class="offre-card__salary">300&nbsp;000 <span>FCFA / mois</span></p>
+                  <p class="offre-card__date">Publiée le 8 sept. 2026</p>
+                </div>
+              </article>
+
+              <article class="card card--outlined card--interactive offre-card">
+                <div class="avatar avatar--sky" aria-hidden="true">Od</div>
+                <div>
+                  <h3 class="offre-card__title"><a class="stretched-link" href="offre.html">Product Designer</a></h3>
+                  <p class="offre-card__meta">
+                    <span><a href="entreprise.html">Orange Digital Center</a></span>
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Dakar</span>
+                    <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Il y a 2 semaines</span>
+                  </p>
+                  <ul class="offre-card__tags">
+                    <li class="badge badge--blue">CDD</li>
+                    <li class="badge">Sur site</li>
+                    <li class="badge badge--outline">Figma</li>
+                    <li class="badge badge--outline">UX</li>
+                  </ul>
+                  <p class="offre-card__desc">Concevez les parcours et les interfaces des programmes de formation du centre, de la recherche utilisateur au prototype final.</p>
+                </div>
+                <div class="offre-card__aside">
+                  <p class="offre-card__salary">650&nbsp;000 <span>FCFA / mois</span></p>
+                  <p class="offre-card__date">Publiée le 4 sept. 2026</p>
+                </div>
+              </article>
+
+            </div>
+
+            <!-- {% empty %} : bloc à afficher à la place de la liste quand aucune offre ne correspond aux filtres.
+            <div class="empty">
+              <span class="icon-box icon-box--lg icon-box--amber" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13.5 8.5-5 5"/><path d="m8.5 8.5 5 5"/><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              </span>
+              <h3>Aucune offre ne correspond</h3>
+              <p>Essayez d'élargir votre recherche : une autre ville, un autre type de contrat ou un salaire minimum plus bas.</p>
+              <a class="btn btn--primary" href="offres.html">Réinitialiser les filtres</a>
+            </div>
+            {% endfor %} -->
+
+            <!-- Pagination (→ page_obj.has_previous, page_obj.number, page_obj.paginator.page_range, page_obj.has_next) -->
+            <nav aria-label="Pagination">
+              <ul class="pagination">
+                <li class="is-disabled">
+                  <span aria-disabled="true">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+                    Précédent
+                  </span>
+                </li>
+                <li><a href="offres.html?page=1" aria-current="page">1</a></li>
+                <li><a href="offres.html?page=2">2</a></li>
+                <li><a href="offres.html?page=3">3</a></li>
+                <li><span aria-hidden="true">…</span></li>
+                <li><a href="offres.html?page=11">11</a></li>
+                <li>
+                  <a href="offres.html?page=2">
+                    Suivant
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       FOOTER — commun à toutes les pages (→ templates/base.html)
+       ==================================================================== -->
+  <footer class="site-footer on-dark">
+    <div class="container site-footer__inner">
+      <div>
+        <a class="brand" href="index.html">
+          <img class="brand__mark" src="assets/logo.svg" alt="" width="36" height="36">
+          <span class="brand__name">DakarTech<strong>Jobs</strong></span>
+        </a>
+        <p class="site-footer__about">
+          La plateforme d'emploi dédiée aux métiers du numérique au Sénégal.
+          Projet pédagogique réalisé avec Django.
+        </p>
+      </div>
+      <div>
+        <h3 class="site-footer__title">Candidats</h3>
+        <ul class="site-footer__links">
+          <li><a href="offres.html">Toutes les offres</a></li>
+          <li><a href="entreprises.html">Entreprises</a></li>
+          <li><a href="inscription.html">Créer un compte</a></li>
+          <li><a href="candidatures.html">Mes candidatures</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="site-footer__title">Recruteurs</h3>
+        <ul class="site-footer__links">
+          <li><a href="inscription.html">Publier une offre</a></li>
+          <li><a href="contact.html">Nous contacter</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="site-footer__title">À propos</h3>
+        <ul class="site-footer__links">
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Mentions légales</a></li>
+          <li><a href="#">Confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom-wrap">
+      <div class="container site-footer__bottom">
+        <span>© 2026 DakarTech Jobs — Dakar Institute of Technology</span>
+        <span class="cluster">
+          <a href="#">Mentions légales</a>
+          <a href="#">Confidentialité</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Baamtu — DakarTech Jobs</title>
+  <meta name="description" content="Baamtu, ESN dakaroise spécialisée en data et intelligence artificielle : 6 offres d'emploi tech en cours sur DakarTech Jobs.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <!-- ====================================================================
+       HEADER — commun à toutes les pages (→ templates/base.html)
+       ==================================================================== -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html">
+        <img class="brand__mark" src="assets/logo.svg" alt="" width="36" height="36">
+        <span class="brand__name">DakarTech<strong>Jobs</strong></span>
+      </a>
+
+      <button class="nav-toggle" type="button" data-toggle="nav" aria-controls="site-nav" aria-expanded="false" aria-label="Ouvrir le menu">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Navigation principale">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="index.html">Accueil</a></li>
+          <li><a class="site-nav__link" href="offres.html">Offres</a></li>
+          <li><a class="site-nav__link is-active" href="entreprises.html" aria-current="page">Entreprises</a></li>
+          <li><a class="site-nav__link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="site-nav__actions">
+          <a class="btn btn--ghost" href="connexion.html">Connexion</a>
+          <a class="btn btn--primary" href="inscription.html">Créer un compte</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       CONTENU DE LA PAGE (→ {% block content %})
+       Vue Django : detail_entreprise(request, entreprise_id)
+       Contexte   : entreprise = get_object_or_404(Entreprise, pk=entreprise_id)
+                    offres = entreprise.offres.all()   (relation Entreprise → Offre)
+       ==================================================================== -->
+  <main id="main">
+
+    <!-- En-tête sombre : identité de l'entreprise + chiffres clés -->
+    <section class="page-head page-head--dark on-dark">
+      <div class="container">
+
+        <!-- Fil d'Ariane (→ {% url 'liste_entreprises' %}) -->
+        <nav aria-label="Fil d'Ariane">
+          <ol class="breadcrumb">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="entreprises.html">Entreprises</a></li>
+            <li aria-current="page">Baamtu</li>
+          </ol>
+        </nav>
+
+        <!-- Identité : avatar (initiales), nom, méta, actions -->
+        <div class="offre-head">
+          <div class="avatar avatar--xl avatar--green" aria-hidden="true">Ba</div>
+          <div class="offre-head__body">
+            <span class="kicker">ESN · Data &amp; IA</span>
+            <h1 class="offre-head__title">Baamtu</h1>
+            <!-- {{ entreprise.ville }}, {{ entreprise.taille }}, {{ entreprise.site_web }}, {{ entreprise.annee_creation }} -->
+            <div class="cluster">
+              <span>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                Dakar
+              </span>
+              <span>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                120 collaborateurs
+              </span>
+              <span>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                <a href="#">baamtu.com</a>
+              </span>
+              <span>
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></svg>
+                Fondée en 2010
+              </span>
+            </div>
+          </div>
+          <div class="offre-head__actions">
+            <a class="btn btn--secondary" href="#offres">
+              Voir les 6 offres
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+            </a>
+            <button class="btn btn--outline" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+              Suivre
+            </button>
+          </div>
+        </div>
+
+        <!-- Chiffres clés (→ {{ offres.count }}, {{ entreprise.taille }}…) -->
+        <div class="grid grid--4 mt-8">
+          <div class="stat stat--green">
+            <p class="stat__value">6</p>
+            <p class="stat__label">offres actives</p>
+          </div>
+          <div class="stat stat--blue">
+            <p class="stat__value">120</p>
+            <p class="stat__label">collaborateurs</p>
+          </div>
+          <div class="stat stat--amber">
+            <p class="stat__value">16</p>
+            <p class="stat__label">ans d'existence</p>
+          </div>
+          <div class="stat stat--pink">
+            <p class="stat__value">48</p>
+            <p class="stat__label">recrutements via la plateforme</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Corps de page : présentation + offres à gauche, panneau d'informations à droite -->
+    <section class="section">
+      <div class="container">
+        <div class="layout-sidebar layout-sidebar--right">
+
+          <!-- Colonne principale -->
+          <div>
+            <!-- {{ entreprise.description|linebreaks }} -->
+            <div class="prose">
+              <h2 class="mt-0">À propos</h2>
+              <p>
+                Fondée en 2010 à Dakar, Baamtu est une entreprise de services numériques
+                spécialisée dans la <strong>data</strong>, l'<strong>intelligence artificielle</strong>
+                et le développement d'applications web et mobiles. Ses 120 collaborateurs
+                conçoivent des plateformes de traitement de données, des outils d'aide à la
+                décision et des services en ligne pour des clients au Sénégal et dans la sous-région.
+              </p>
+              <p>
+                Baamtu accompagne des banques, des opérateurs télécoms et des administrations
+                publiques dans la modernisation de leurs systèmes d'information : entrepôts de
+                données, tableaux de bord, scoring, automatisation de processus métier et
+                déploiement d'infrastructures cloud.
+              </p>
+              <p>
+                L'entreprise investit aussi dans la formation : chaque année, elle accueille des
+                stagiaires et des alternants issus des écoles d'ingénieurs dakaroises, et
+                organise des ateliers ouverts à la communauté tech locale.
+              </p>
+
+              <h2>Pourquoi nous rejoindre</h2>
+              <ul class="list-check">
+                <li>Des projets data et IA à fort impact pour de grands comptes sénégalais.</li>
+                <li>Un plan de formation annuel et des certifications prises en charge (AWS, Databricks…).</li>
+                <li>Télétravail hybride (2 jours par semaine) et horaires flexibles.</li>
+                <li>Mutuelle santé, prime de performance et treizième mois.</li>
+              </ul>
+            </div>
+
+            <!-- Offres de l'entreprise (→ {% for offre in offres %} … {% empty %} <div class="empty">…</div> {% endfor %}) -->
+            <div id="offres" class="mt-12">
+              <div class="section__head">
+                <div>
+                  <span class="kicker">Recrutement</span>
+                  <h2>6 offres en cours</h2>
+                </div>
+                <a class="btn btn--ghost btn--sm" href="offres.html?entreprise=baamtu">
+                  Toutes les offres
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+              </div>
+
+              <div class="offres-list">
+
+                <!-- Une carte par offre ; le lien du titre → {% url 'detail_offre' offre.id %} -->
+                <article class="card card--outlined card--interactive offre-card">
+                  <div class="avatar avatar--green" aria-hidden="true">Ba</div>
+                  <div>
+                    <h3 class="offre-card__title"><a class="stretched-link" href="offre.html">Développeur Django</a></h3>
+                    <p class="offre-card__meta">
+                      <span>Baamtu</span>
+                      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Dakar</span>
+                    </p>
+                    <ul class="offre-card__tags">
+                      <li class="badge badge--green">CDI</li>
+                      <li class="badge">Hybride</li>
+                    </ul>
+                  </div>
+                  <div class="offre-card__aside">
+                    <p class="offre-card__salary">750&nbsp;000 <span>FCFA / mois</span></p>
+                    <p class="offre-card__date">Il y a 2 jours</p>
+                  </div>
+                </article>
+
+                <article class="card card--outlined card--interactive offre-card">
+                  <div class="avatar avatar--green" aria-hidden="true">Ba</div>
+                  <div>
+                    <h3 class="offre-card__title"><a class="stretched-link" href="offre.html">Data Engineer</a></h3>
+                    <p class="offre-card__meta">
+                      <span>Baamtu</span>
+                      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Dakar</span>
+                    </p>
+                    <ul class="offre-card__tags">
+                      <li class="badge badge--green">CDI</li>
+                      <li class="badge">Sur site</li>
+                    </ul>
+                  </div>
+                  <div class="offre-card__aside">
+                    <p class="offre-card__salary">1&nbsp;100&nbsp;000 <span>FCFA / mois</span></p>
+                    <p class="offre-card__date">Il y a 4 jours</p>
+                  </div>
+                </article>
+
+                <article class="card card--outlined card--interactive offre-card">
+                  <div class="avatar avatar--green" aria-hidden="true">Ba</div>
+                  <div>
+                    <h3 class="offre-card__title"><a class="stretched-link" href="offre.html">Stagiaire Data Science</a></h3>
+                    <p class="offre-card__meta">
+                      <span>Baamtu</span>
+                      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Dakar</span>
+                    </p>
+                    <ul class="offre-card__tags">
+                      <li class="badge badge--amber">Stage</li>
+                      <li class="badge">Sur site</li>
+                    </ul>
+                  </div>
+                  <div class="offre-card__aside">
+                    <p class="offre-card__salary">200&nbsp;000 <span>FCFA / mois</span></p>
+                    <p class="offre-card__date">Il y a 5 jours</p>
+                  </div>
+                </article>
+
+                <article class="card card--outlined card--interactive offre-card">
+                  <div class="avatar avatar--green" aria-hidden="true">Ba</div>
+                  <div>
+                    <h3 class="offre-card__title"><a class="stretched-link" href="offre.html">Développeur React</a></h3>
+                    <p class="offre-card__meta">
+                      <span>Baamtu</span>
+                      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Dakar</span>
+                    </p>
+                    <ul class="offre-card__tags">
+                      <li class="badge badge--blue">CDD</li>
+                      <li class="badge">Télétravail</li>
+                    </ul>
+                  </div>
+                  <div class="offre-card__aside">
+                    <p class="offre-card__salary">800&nbsp;000 <span>FCFA / mois</span></p>
+                    <p class="offre-card__date">Il y a 1 semaine</p>
+                  </div>
+                </article>
+
+                <article class="card card--outlined card--interactive offre-card">
+                  <div class="avatar avatar--green" aria-hidden="true">Ba</div>
+                  <div>
+                    <h3 class="offre-card__title"><a class="stretched-link" href="offre.html">Chef de projet IT</a></h3>
+                    <p class="offre-card__meta">
+                      <span>Baamtu</span>
+                      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Dakar</span>
+                    </p>
+                    <ul class="offre-card__tags">
+                      <li class="badge badge--green">CDI</li>
+                      <li class="badge">Hybride</li>
+                    </ul>
+                  </div>
+                  <div class="offre-card__aside">
+                    <p class="offre-card__salary">1&nbsp;400&nbsp;000 <span>FCFA / mois</span></p>
+                    <p class="offre-card__date">Il y a 1 semaine</p>
+                  </div>
+                </article>
+
+                <article class="card card--outlined card--interactive offre-card">
+                  <div class="avatar avatar--green" aria-hidden="true">Ba</div>
+                  <div>
+                    <h3 class="offre-card__title"><a class="stretched-link" href="offre.html">Développeur Python freelance</a></h3>
+                    <p class="offre-card__meta">
+                      <span>Baamtu</span>
+                      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Dakar</span>
+                    </p>
+                    <ul class="offre-card__tags">
+                      <li class="badge badge--pink">Freelance</li>
+                      <li class="badge">Télétravail</li>
+                    </ul>
+                  </div>
+                  <div class="offre-card__aside">
+                    <p class="offre-card__salary">900&nbsp;000 <span>FCFA / mois</span></p>
+                    <p class="offre-card__date">Il y a 2 semaines</p>
+                  </div>
+                </article>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Barre latérale : fiche d'identité, technologies, alerte -->
+          <aside class="sidebar stack">
+
+            <!-- Fiche (→ champs du modèle Entreprise) -->
+            <div class="card card--tinted">
+              <h3 class="card__title mb-4">Informations</h3>
+              <dl class="info-list">
+                <div><dt>Secteur</dt><dd>ESN · Data &amp; IA</dd></div>
+                <div><dt>Taille</dt><dd>120 collaborateurs</dd></div>
+                <div><dt>Siège</dt><dd>Dakar, Sénégal</dd></div>
+                <div><dt>Fondée</dt><dd>2010</dd></div>
+                <div><dt>Site web</dt><dd><a class="link" href="#">baamtu.com</a></dd></div>
+                <div><dt>E-mail</dt><dd><a class="link" href="#">jobs@baamtu.com</a></dd></div>
+              </dl>
+            </div>
+
+            <!-- Technologies (→ {% for techno in entreprise.technologies.all %}) -->
+            <div class="card card--outlined">
+              <h3 class="card__title mb-4">Technologies</h3>
+              <div class="cluster cluster--sm">
+                <span class="chip">Python</span>
+                <span class="chip">Django</span>
+                <span class="chip">React</span>
+                <span class="chip">PostgreSQL</span>
+                <span class="chip">Spark</span>
+                <span class="chip">Docker</span>
+                <span class="chip">AWS</span>
+              </div>
+            </div>
+
+            <!-- Alerte e-mail (→ {% url 'inscription' %}) -->
+            <div class="card card--dark card--compact on-dark">
+              <span class="kicker">Alerte</span>
+              <h3>Nouvelles offres de Baamtu</h3>
+              <p class="small">Recevez un e-mail dès que Baamtu publie une nouvelle offre correspondant à votre profil.</p>
+              <a class="btn btn--secondary btn--block" href="inscription.html">Créer une alerte</a>
+            </div>
+
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       FOOTER — commun à toutes les pages (→ templates/base.html)
+       ==================================================================== -->
+  <footer class="site-footer on-dark">
+    <div class="container site-footer__inner">
+      <div>
+        <a class="brand" href="index.html">
+          <img class="brand__mark" src="assets/logo.svg" alt="" width="36" height="36">
+          <span class="brand__name">DakarTech<strong>Jobs</strong></span>
+        </a>
+        <p class="site-footer__about">
+          La plateforme d'emploi dédiée aux métiers du numérique au Sénégal.
+          Projet pédagogique réalisé avec Django.
+        </p>
+      </div>
+      <div>
+        <h3 class="site-footer__title">Candidats</h3>
+        <ul class="site-footer__links">
+          <li><a href="offres.html">Toutes les offres</a></li>
+          <li><a href="entreprises.html">Entreprises</a></li>
+          <li><a href="inscription.html">Créer un compte</a></li>
+          <li><a href="candidatures.html">Mes candidatures</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="site-footer__title">Recruteurs</h3>
+        <ul class="site-footer__links">
+          <li><a href="inscription.html">Publier une offre</a></li>
+          <li><a href="contact.html">Nous contacter</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="site-footer__title">À propos</h3>
+        <ul class="site-footer__links">
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Mentions légales</a></li>
+          <li><a href="#">Confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom-wrap">
+      <div class="container site-footer__bottom">
+        <span>© 2026 DakarTech Jobs — Dakar Institute of Technology</span>
+        <span class="cluster">
+          <a href="#">Mentions légales</a>
+          <a href="#">Confidentialité</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+</body>
+</html>

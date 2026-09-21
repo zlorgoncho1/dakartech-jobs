@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Postuler : Développeur Django — DakarTech Jobs</title>
+  <meta name="description" content="Candidature à l'offre Développeur Django chez Baamtu (Dakar, CDI) sur DakarTech Jobs.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <!-- ====================================================================
+       HEADER — commun à toutes les pages (→ templates/base.html)
+       ==================================================================== -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html">
+        <img class="brand__mark" src="assets/logo.svg" alt="" width="36" height="36">
+        <span class="brand__name">DakarTech<strong>Jobs</strong></span>
+      </a>
+
+      <button class="nav-toggle" type="button" data-toggle="nav" aria-controls="site-nav" aria-expanded="false" aria-label="Ouvrir le menu">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Navigation principale">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="index.html">Accueil</a></li>
+          <li><a class="site-nav__link is-active" href="offres.html" aria-current="page">Offres</a></li>
+          <li><a class="site-nav__link" href="entreprises.html">Entreprises</a></li>
+          <li><a class="site-nav__link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="site-nav__actions">
+          <a class="btn btn--ghost" href="connexion.html">Connexion</a>
+          <a class="btn btn--primary" href="inscription.html">Créer un compte</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       CONTENU DE LA PAGE (→ {% block content %})
+       Vue Django « postuler(request, offre_id) » :
+         GET  → form = CandidatureForm()
+         POST → form = CandidatureForm(request.POST, request.FILES)
+       ==================================================================== -->
+  <main id="main">
+
+    <!-- En-tête de page : fil d'Ariane + titre (→ {{ offre.titre }}, {{ offre.entreprise.nom }}) -->
+    <section class="page-head">
+      <div class="container">
+        <nav aria-label="Fil d'Ariane">
+          <ol class="breadcrumb">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="offres.html">Offres</a></li>
+            <!-- → {% url 'detail_offre' offre.id %} -->
+            <li><a href="offre.html">Développeur Django</a></li>
+            <li aria-current="page">Postuler</li>
+          </ol>
+        </nav>
+        <h1 class="page-head__title">Postuler&nbsp;: Développeur Django</h1>
+        <p class="page-head__lead">Baamtu · Dakar · CDI</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="layout-sidebar layout-sidebar--right">
+
+          <!-- Colonne principale : le formulaire de candidature (forms.py → ModelForm Candidature).
+               Rendu champ par champ : .form-group + .form-label + .form-control
+               (chaque <input> correspond à {{ form.prenom }}, {{ form.email }}, {{ form.cv }}…) -->
+          <div class="card card--outlined">
+            <form class="form" method="post" enctype="multipart/form-data" data-validate>
+              <!-- {% csrf_token %} -->
+
+              <fieldset>
+                <legend>Vos informations</legend>
+                <div class="stack">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label" for="prenom">Prénom <span class="required">*</span></label>
+                      <input class="form-control" type="text" id="prenom" name="prenom" placeholder="Aminata" autocomplete="given-name" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="nom">Nom <span class="required">*</span></label>
+                      <input class="form-control" type="text" id="nom" name="nom" placeholder="Diallo" autocomplete="family-name" required>
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label" for="email">E-mail <span class="required">*</span></label>
+                      <!-- État d'erreur : Django ré-affiche la valeur saisie ({{ field.value }})
+                           et la classe .is-invalid se pose quand {{ field.errors }} n'est pas vide -->
+                      <input class="form-control is-invalid" type="email" id="email" name="email" value="aminata@exemple" autocomplete="email" aria-invalid="true" aria-describedby="email-error" required>
+                      <!-- rendu de {{ field.errors }} -->
+                      <p class="form-error mb-0" id="email-error">Entrez une adresse e-mail valide.</p>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="telephone">Téléphone</label>
+                      <input class="form-control" type="tel" id="telephone" name="telephone" placeholder="+221 77 000 00 00" autocomplete="tel">
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+
+              <hr class="divider mt-0 mb-0">
+
+              <fieldset>
+                <legend>Votre candidature</legend>
+                <div class="stack">
+                  <!-- Champ fichier : FileField du modèle → request.FILES['cv'] -->
+                  <div class="form-group">
+                    <label class="form-label" for="cv">CV <span class="required">*</span></label>
+                    <label class="form-file" for="cv">
+                      <input type="file" id="cv" name="cv" accept=".pdf" required>
+                      <span class="btn btn--outline btn--sm">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5"/><path d="M12 3v12"/></svg>
+                        Choisir un fichier
+                      </span>
+                      <span class="form-file__name">Aucun fichier sélectionné</span>
+                    </label>
+                    <p class="form-help mb-0">PDF, 2&nbsp;Mo maximum</p>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="lettre">Lettre de motivation <span class="required">*</span></label>
+                    <textarea class="form-control" id="lettre" name="lettre_motivation" rows="6" placeholder="Bonjour, je vous adresse ma candidature au poste de Développeur Django…" required></textarea>
+                    <p class="form-help mb-0">Quelques lignes suffisent : votre parcours, vos réalisations et ce qui vous attire chez Baamtu.</p>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label" for="lien">Lien LinkedIn ou portfolio</label>
+                      <input class="form-control" type="url" id="lien" name="lien" placeholder="https://www.linkedin.com/in/…" autocomplete="url">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="disponibilite">Disponibilité</label>
+                      <select class="form-control" id="disponibilite" name="disponibilite">
+                        <option value="immediate">Immédiate</option>
+                        <option value="1-mois">Sous 1 mois</option>
+                        <option value="3-mois">Sous 3 mois</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="pretention">Prétention salariale</label>
+                    <input class="form-control" type="number" id="pretention" name="pretention_salariale" min="0" step="50000" placeholder="750000" inputmode="numeric">
+                    <p class="form-help mb-0">en FCFA par mois</p>
+                  </div>
+                </div>
+              </fieldset>
+
+              <hr class="divider mt-0 mb-0">
+
+              <!-- Consentement (BooleanField(required=True)) -->
+              <div class="form-group">
+                <label class="form-check" for="consentement">
+                  <input type="checkbox" id="consentement" name="consentement" required>
+                  <span>J'accepte que mes données soient transmises à <strong>Baamtu</strong> dans le cadre de cette candidature. <span class="required">*</span></span>
+                </label>
+              </div>
+
+              <div class="form-actions">
+                <button class="btn btn--primary btn--lg" type="submit">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                  Envoyer ma candidature
+                </button>
+                <!-- → {% url 'detail_offre' offre.id %} -->
+                <a class="btn btn--ghost" href="offre.html">Annuler</a>
+              </div>
+            </form>
+          </div>
+
+          <!-- Barre latérale : rappel de l'offre (→ variable « offre » du contexte) -->
+          <aside class="sidebar stack" aria-label="Récapitulatif de l'offre">
+
+            <div class="card card--tinted">
+              <h2 class="kicker">Vous postulez à</h2>
+              <div class="cluster">
+                <span class="avatar avatar--green" aria-hidden="true">Ba</span>
+                <div class="flex-1">
+                  <h3 class="offre-card__title"><a href="offre.html">Développeur Django</a></h3>
+                  <p class="muted small mb-0">Baamtu · Dakar</p>
+                </div>
+              </div>
+              <ul class="offre-card__tags mt-4">
+                <li class="badge badge--green">CDI</li>
+                <li class="badge">Hybride</li>
+              </ul>
+              <p class="fw-extra mt-4 mb-0">750&nbsp;000 FCFA <span class="muted small fw-bold">/ mois</span></p>
+            </div>
+
+            <!-- Information statique (ce n'est pas un message Django, pas de bouton de fermeture) -->
+            <div class="alert alert--info" role="note">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              <div class="alert__body">
+                <p>Votre candidature est envoyée directement au recruteur. Vous pourrez la suivre depuis <a href="candidatures.html">Mes candidatures</a>.</p>
+              </div>
+            </div>
+
+            <div class="card card--outlined">
+              <h2 class="card__title">Conseils</h2>
+              <ul class="list-check small mb-0">
+                <li>Un CV d'une page, à jour et au format PDF.</li>
+                <li>Une lettre courte qui répond à l'offre, pas un modèle générique.</li>
+                <li>Relisez-vous : orthographe, e-mail et téléphone exacts.</li>
+              </ul>
+            </div>
+
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       FOOTER — commun à toutes les pages (→ templates/base.html)
+       ==================================================================== -->
+  <footer class="site-footer on-dark">
+    <div class="container site-footer__inner">
+      <div>
+        <a class="brand" href="index.html">
+          <img class="brand__mark" src="assets/logo.svg" alt="" width="36" height="36">
+          <span class="brand__name">DakarTech<strong>Jobs</strong></span>
+        </a>
+        <p class="site-footer__about">
+          La plateforme d'emploi dédiée aux métiers du numérique au Sénégal.
+          Projet pédagogique réalisé avec Django.
+        </p>
+      </div>
+      <div>
+        <h3 class="site-footer__title">Candidats</h3>
+        <ul class="site-footer__links">
+          <li><a href="offres.html">Toutes les offres</a></li>
+          <li><a href="entreprises.html">Entreprises</a></li>
+          <li><a href="inscription.html">Créer un compte</a></li>
+          <li><a href="candidatures.html">Mes candidatures</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="site-footer__title">Recruteurs</h3>
+        <ul class="site-footer__links">
+          <li><a href="inscription.html">Publier une offre</a></li>
+          <li><a href="contact.html">Nous contacter</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="site-footer__title">À propos</h3>
+        <ul class="site-footer__links">
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Mentions légales</a></li>
+          <li><a href="#">Confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom-wrap">
+      <div class="container site-footer__bottom">
+        <span>© 2026 DakarTech Jobs — Dakar Institute of Technology</span>
+        <span class="cluster">
+          <a href="#">Mentions légales</a>
+          <a href="#">Confidentialité</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+</body>
+</html>

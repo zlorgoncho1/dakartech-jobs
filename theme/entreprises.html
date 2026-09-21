@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entreprises — DakarTech Jobs</title>
+  <meta name="description" content="Annuaire des entreprises tech qui recrutent au Sénégal : ESN, télécoms, fintech, santé numérique, secteur public.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <!-- ====================================================================
+       HEADER — commun à toutes les pages (→ templates/base.html)
+       ==================================================================== -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html">
+        <img class="brand__mark" src="assets/logo.svg" alt="" width="36" height="36">
+        <span class="brand__name">DakarTech<strong>Jobs</strong></span>
+      </a>
+
+      <button class="nav-toggle" type="button" data-toggle="nav" aria-controls="site-nav" aria-expanded="false" aria-label="Ouvrir le menu">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Navigation principale">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="index.html">Accueil</a></li>
+          <li><a class="site-nav__link" href="offres.html">Offres</a></li>
+          <li><a class="site-nav__link is-active" href="entreprises.html" aria-current="page">Entreprises</a></li>
+          <li><a class="site-nav__link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="site-nav__actions">
+          <a class="btn btn--ghost" href="connexion.html">Connexion</a>
+          <a class="btn btn--primary" href="inscription.html">Créer un compte</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       CONTENU DE LA PAGE (→ {% block content %})
+       Vue Django : liste_entreprises — contexte : entreprises (page_obj), total
+       ==================================================================== -->
+  <main id="main">
+
+    <!-- En-tête de page (fond teinté) + recherche par nom / secteur -->
+    <section class="page-head">
+      <div class="container">
+        <span class="kicker">Annuaire</span>
+        <h1 class="page-head__title">36 entreprises recrutent</h1>
+        <p class="page-head__lead">
+          ESN, opérateurs télécoms, fintechs, éditeurs e-santé, administrations : découvrez les
+          entreprises qui embauchent des profils tech au Sénégal et leurs offres en cours.
+        </p>
+
+        <!-- Recherche : en Django, <form method="get" action="{% url 'liste_entreprises' %}">,
+             les paramètres ?q= et ?secteur= sont lus dans request.GET -->
+        <form class="search-bar search-bar--outlined mt-6" method="get" role="search">
+          <label class="search-bar__field">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <span class="sr-only">Nom de l'entreprise</span>
+            <input type="search" name="q" placeholder="Nom de l'entreprise…" autocomplete="off">
+          </label>
+          <label class="search-bar__field search-bar__field--select">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+            <span class="sr-only">Secteur d'activité</span>
+            <select name="secteur">
+              <option value="">Tous les secteurs</option>
+              <option value="esn">ESN</option>
+              <option value="telecoms">Télécoms</option>
+              <option value="fintech">Fintech</option>
+              <option value="sante">Santé numérique</option>
+              <option value="public">Secteur public</option>
+              <option value="logistique">Logistique</option>
+            </select>
+          </label>
+          <button class="btn btn--primary" type="submit">Rechercher</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Liste des entreprises -->
+    <section class="section">
+      <div class="container">
+
+        <!-- Compteur : {{ page_obj.paginator.count }} -->
+        <div class="results-bar">
+          <p class="results-bar__count"><strong>36</strong> entreprises</p>
+          <div class="results-bar__sort">
+            <label for="tri">Trier par</label>
+            <select class="form-control form-control--sm" id="tri" name="tri">
+              <option value="offres">Nombre d'offres</option>
+              <option value="nom">Nom (A → Z)</option>
+              <option value="recent">Récemment ajoutées</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Une carte par entreprise (→ {% for entreprise in entreprises %} … {% empty %} bloc .empty {% endfor %}).
+             La couleur de l'avatar peut tourner avec {% cycle 'green' 'blue' 'amber' 'pink' 'sky' %}.
+             Les liens → {% url 'detail_entreprise' entreprise.id %} -->
+        <div class="grid grid--3">
+
+          <article class="card card--outlined card--interactive entreprise-card">
+            <div class="entreprise-card__head">
+              <div class="avatar avatar--green" aria-hidden="true">Ba</div>
+              <div>
+                <h2 class="entreprise-card__name"><a href="entreprise.html">Baamtu</a></h2>
+                <p class="entreprise-card__sector">ESN · Data &amp; IA</p>
+              </div>
+            </div>
+            <p class="entreprise-card__desc">ESN dakaroise spécialisée en data, intelligence artificielle et développement d'applications sur mesure.</p>
+            <div class="cluster cluster--sm">
+              <span class="badge">Dakar</span>
+              <span class="badge badge--green">Django</span>
+              <span class="badge">Data</span>
+            </div>
+            <div class="entreprise-card__foot">
+              <span class="entreprise-card__count">6 offres actives</span>
+              <a class="btn btn--soft btn--sm" href="entreprise.html">Voir</a>
+            </div>
+          </article>
+
+          <article class="card card--outlined card--interactive entreprise-card">
+            <div class="entreprise-card__head">
+              <div class="avatar avatar--blue" aria-hidden="true">So</div>
+              <div>
+                <h2 class="entreprise-card__name"><a href="entreprise.html">Sonatel</a></h2>
+                <p class="entreprise-card__sector">Télécoms</p>
+              </div>
+            </div>
+            <p class="entreprise-card__desc">Opérateur télécoms historique du Sénégal, filiale du groupe Orange, présent dans cinq pays d'Afrique de l'Ouest.</p>
+            <div class="cluster cluster--sm">
+              <span class="badge">Dakar</span>
+              <span class="badge badge--blue">Laravel</span>
+              <span class="badge">DevOps</span>
+            </div>
+            <div class="entreprise-card__foot">
+              <span class="entreprise-card__count">4 offres actives</span>
+              <a class="btn btn--soft btn--sm" href="entreprise.html">Voir</a>
+            </div>
+          </article>
+
+          <article class="card card--outlined card--interactive entreprise-card">
+            <div class="entreprise-card__head">
+              <div class="avatar avatar--amber" aria-hidden="true">Ey</div>
+              <div>
+                <h2 class="entreprise-card__name"><a href="entreprise.html">Eyone</a></h2>
+                <p class="entreprise-card__sector">Santé numérique</p>
+              </div>
+            </div>
+            <p class="entreprise-card__desc">Éditeur de solutions e-santé : dossier patient partagé, télémédecine et gestion hospitalière.</p>
+            <div class="cluster cluster--sm">
+              <span class="badge">Dakar</span>
+              <span class="badge badge--amber">NestJS</span>
+              <span class="badge">Angular</span>
+            </div>
+            <div class="entreprise-card__foot">
+              <span class="entreprise-card__count">3 offres actives</span>
+              <a class="btn btn--soft btn--sm" href="entreprise.html">Voir</a>
+            </div>
+          </article>
+
+          <article class="card card--outlined card--interactive entreprise-card">
+            <div class="entreprise-card__head">
+              <div class="avatar avatar--pink" aria-hidden="true">Ya</div>
+              <div>
+                <h2 class="entreprise-card__name"><a href="entreprise.html">Yas</a></h2>
+                <p class="entreprise-card__sector">Télécoms</p>
+              </div>
+            </div>
+            <p class="entreprise-card__desc">Opérateur mobile qui accélère sur le mobile money, la 4G+ et les services numériques grand public.</p>
+            <div class="cluster cluster--sm">
+              <span class="badge">Dakar</span>
+              <span class="badge badge--pink">Angular</span>
+              <span class="badge">Flutter</span>
+            </div>
+            <div class="entreprise-card__foot">
+              <span class="entreprise-card__count">2 offres actives</span>
+              <a class="btn btn--soft btn--sm" href="entreprise.html">Voir</a>
+            </div>
+          </article>
+
+          <article class="card card--outlined card--interactive entreprise-card">
+            <div class="entreprise-card__head">
+              <div class="avatar avatar--sky" aria-hidden="true">Wa</div>
+              <div>
+                <h2 class="entreprise-card__name"><a href="entreprise.html">Wave</a></h2>
+                <p class="entreprise-card__sector">Fintech</p>
+              </div>
+            </div>
+            <p class="entreprise-card__desc">Application de paiement mobile à faible coût, l'une des plus utilisées au Sénégal et en Afrique de l'Ouest.</p>
+            <div class="cluster cluster--sm">
+              <span class="badge">Dakar</span>
+              <span class="badge badge--sky">Data</span>
+              <span class="badge">Flutter</span>
+            </div>
+            <div class="entreprise-card__foot">
+              <span class="entreprise-card__count">5 offres actives</span>
+              <a class="btn btn--soft btn--sm" href="entreprise.html">Voir</a>
+            </div>
+          </article>
+
+          <article class="card card--outlined card--interactive entreprise-card">
+            <div class="entreprise-card__head">
+              <div class="avatar avatar--green" aria-hidden="true">Sn</div>
+              <div>
+                <h2 class="entreprise-card__name"><a href="entreprise.html">Sénégal Numérique</a></h2>
+                <p class="entreprise-card__sector">Secteur public</p>
+              </div>
+            </div>
+            <p class="entreprise-card__desc">Société publique en charge des infrastructures numériques de l'État et du parc technologique de Diamniadio.</p>
+            <div class="cluster cluster--sm">
+              <span class="badge">Diamniadio</span>
+              <span class="badge badge--green">DevOps</span>
+              <span class="badge">Cloud</span>
+            </div>
+            <div class="entreprise-card__foot">
+              <span class="entreprise-card__count">3 offres actives</span>
+              <a class="btn btn--soft btn--sm" href="entreprise.html">Voir</a>
+            </div>
+          </article>
+
+          <article class="card card--outlined card--interactive entreprise-card">
+            <div class="entreprise-card__head">
+              <div class="avatar avatar--blue" aria-hidden="true">Ex</div>
+              <div>
+                <h2 class="entreprise-card__name"><a href="entreprise.html">Expresso</a></h2>
+                <p class="entreprise-card__sector">Télécoms</p>
+              </div>
+            </div>
+            <p class="entreprise-card__desc">Troisième opérateur mobile du pays, filiale de Sudatel, avec un centre technique installé à Thiès.</p>
+            <div class="cluster cluster--sm">
+              <span class="badge">Thiès</span>
+              <span class="badge badge--blue">Django</span>
+              <span class="badge">Réseaux</span>
+            </div>
+            <div class="entreprise-card__foot">
+              <span class="entreprise-card__count">2 offres actives</span>
+              <a class="btn btn--soft btn--sm" href="entreprise.html">Voir</a>
+            </div>
+          </article>
+
+          <article class="card card--outlined card--interactive entreprise-card">
+            <div class="entreprise-card__head">
+              <div class="avatar avatar--amber" aria-hidden="true">Ga</div>
+              <div>
+                <h2 class="entreprise-card__name"><a href="entreprise.html">Gaïndé 2000</a></h2>
+                <p class="entreprise-card__sector">Logistique &amp; douane</p>
+              </div>
+            </div>
+            <p class="entreprise-card__desc">Guichet unique du commerce extérieur : dématérialisation des procédures douanières et portuaires.</p>
+            <div class="cluster cluster--sm">
+              <span class="badge">Dakar</span>
+              <span class="badge badge--amber">Laravel</span>
+              <span class="badge">Java</span>
+            </div>
+            <div class="entreprise-card__foot">
+              <span class="entreprise-card__count">2 offres actives</span>
+              <a class="btn btn--soft btn--sm" href="entreprise.html">Voir</a>
+            </div>
+          </article>
+
+          <article class="card card--outlined card--interactive entreprise-card">
+            <div class="entreprise-card__head">
+              <div class="avatar avatar--pink" aria-hidden="true">At</div>
+              <div>
+                <h2 class="entreprise-card__name"><a href="entreprise.html">Atos Sénégal</a></h2>
+                <p class="entreprise-card__sector">ESN</p>
+              </div>
+            </div>
+            <p class="entreprise-card__desc">Filiale du groupe Atos : conseil, intégration de systèmes et infogérance pour les grands comptes de la sous-région.</p>
+            <div class="cluster cluster--sm">
+              <span class="badge">Dakar</span>
+              <span class="badge badge--pink">DevOps</span>
+              <span class="badge">Cloud</span>
+            </div>
+            <div class="entreprise-card__foot">
+              <span class="entreprise-card__count">4 offres actives</span>
+              <a class="btn btn--soft btn--sm" href="entreprise.html">Voir</a>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Pagination (→ page_obj : {% if page_obj.has_previous %} … {% for n in page_obj.paginator.page_range %} … {% if page_obj.has_next %}) -->
+        <nav aria-label="Pagination des entreprises">
+          <ul class="pagination">
+            <li><span aria-current="page">1</span></li>
+            <li><a href="entreprises.html?page=2">2</a></li>
+            <li><a href="entreprises.html?page=3">3</a></li>
+            <li><a href="entreprises.html?page=4">4</a></li>
+            <li>
+              <a href="entreprises.html?page=2">
+                Suivant
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+      </div>
+    </section>
+
+    <!-- Appel à l'action recruteurs -->
+    <section class="section section--flush-top">
+      <div class="container">
+        <div class="cta-band on-dark">
+          <div>
+            <span class="kicker">Recruteurs</span>
+            <h2>Vous êtes une entreprise ?</h2>
+            <p>Créez votre page et publiez vos offres gratuitement. Plus de 1&nbsp;200 candidats tech vous attendent.</p>
+          </div>
+          <div class="cta-band__actions">
+            <a class="btn btn--secondary btn--lg" href="inscription.html">Créer ma page</a>
+            <a class="btn btn--outline btn--lg" href="contact.html">Nous contacter</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       FOOTER — commun à toutes les pages (→ templates/base.html)
+       ==================================================================== -->
+  <footer class="site-footer on-dark">
+    <div class="container site-footer__inner">
+      <div>
+        <a class="brand" href="index.html">
+          <img class="brand__mark" src="assets/logo.svg" alt="" width="36" height="36">
+          <span class="brand__name">DakarTech<strong>Jobs</strong></span>
+        </a>
+        <p class="site-footer__about">
+          La plateforme d'emploi dédiée aux métiers du numérique au Sénégal.
+          Projet pédagogique réalisé avec Django.
+        </p>
+      </div>
+      <div>
+        <h3 class="site-footer__title">Candidats</h3>
+        <ul class="site-footer__links">
+          <li><a href="offres.html">Toutes les offres</a></li>
+          <li><a href="entreprises.html">Entreprises</a></li>
+          <li><a href="inscription.html">Créer un compte</a></li>
+          <li><a href="candidatures.html">Mes candidatures</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="site-footer__title">Recruteurs</h3>
+        <ul class="site-footer__links">
+          <li><a href="inscription.html">Publier une offre</a></li>
+          <li><a href="contact.html">Nous contacter</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="site-footer__title">À propos</h3>
+        <ul class="site-footer__links">
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Mentions légales</a></li>
+          <li><a href="#">Confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom-wrap">
+      <div class="container site-footer__bottom">
+        <span>© 2026 DakarTech Jobs — Dakar Institute of Technology</span>
+        <span class="cluster">
+          <a href="#">Mentions légales</a>
+          <a href="#">Confidentialité</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+</body>
+</html>

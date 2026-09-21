@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guide de style — DakarTech Jobs</title>
+  <meta name="description" content="Catalogue de tous les composants du thème DakarTech Jobs, avec leur balisage HTML : couleurs, boutons, badges, cartes, formulaires, alertes, tableaux, navigation.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <!-- ====================================================================
+       HEADER — commun à toutes les pages (→ templates/base.html)
+       ==================================================================== -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html">
+        <img class="brand__mark" src="assets/logo.svg" alt="" width="36" height="36">
+        <span class="brand__name">DakarTech<strong>Jobs</strong></span>
+      </a>
+
+      <button class="nav-toggle" type="button" data-toggle="nav" aria-controls="site-nav" aria-expanded="false" aria-label="Ouvrir le menu">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Navigation principale">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="index.html">Accueil</a></li>
+          <li><a class="site-nav__link" href="offres.html">Offres</a></li>
+          <li><a class="site-nav__link" href="entreprises.html">Entreprises</a></li>
+          <li><a class="site-nav__link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="site-nav__actions">
+          <a class="btn btn--ghost" href="connexion.html">Connexion</a>
+          <a class="btn btn--primary" href="inscription.html">Créer un compte</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       CONTENU DE LA PAGE (→ {% block content %})
+       Page de référence : elle n'a pas d'équivalent Django, elle sert à
+       copier-coller le balisage des composants dans vos templates.
+       ==================================================================== -->
+  <main id="main">
+
+    <!-- En-tête de page (fond teinté, clair) -->
+    <section class="page-head">
+      <div class="container">
+        <span class="kicker">Référence</span>
+        <h1 class="page-head__title">Guide de style</h1>
+        <p class="page-head__lead">Tous les composants de theme.css, avec leur balisage. Copiez, collez, adaptez.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="layout-sidebar">
+
+          <!-- Sommaire (collant sur grand écran, empilé au-dessus sur mobile) -->
+          <aside class="sidebar">
+            <div class="card card--tinted">
+              <nav aria-label="Sommaire">
+                <span class="kicker">Sommaire</span>
+                <ul class="stack stack--sm toc">
+                  <li><a href="#couleurs">Couleurs</a></li>
+                  <li><a href="#degrades">Dégradés</a></li>
+                  <li><a href="#typographie">Typographie</a></li>
+                  <li><a href="#boutons">Boutons</a></li>
+                  <li><a href="#badges">Badges &amp; chips</a></li>
+                  <li><a href="#avatars">Avatars &amp; icon-box</a></li>
+                  <li><a href="#cartes">Cartes</a></li>
+                  <li><a href="#formulaires">Formulaires</a></li>
+                  <li><a href="#alertes">Alertes</a></li>
+                  <li><a href="#tableaux">Tableaux</a></li>
+                  <li><a href="#navigation">Navigation</a></li>
+                  <li><a href="#blocs">Blocs sombres</a></li>
+                  <li><a href="#etats">États</a></li>
+                </ul>
+              </nav>
+            </div>
+          </aside>
+
+          <!-- Contenu principal : une <section> par famille de composants -->
+          <div>
+
+            <!-- ============================================================
+                 COULEURS
+                 ============================================================ -->
+            <section id="couleurs" class="mb-12">
+              <span class="kicker"><code>:root</code> · variables</span>
+              <h2>Couleurs</h2>
+              <p class="muted">Toutes les couleurs sont des variables CSS. On ne tape jamais une valeur en dur : on écrit <code>var(--primary)</code>.</p>
+
+              <!-- SEUL endroit du thème où l'attribut style est autorisé : le nuancier -->
+              <div class="grid grid--4 grid--swatches">
+                <div class="swatch on-dark" style="background: var(--primary)"><code>--primary</code></div>
+                <div class="swatch" style="background: var(--secondary)"><code>--secondary</code></div>
+                <div class="swatch on-dark" style="background: var(--green)"><code>--green</code></div>
+                <div class="swatch on-dark" style="background: var(--blue)"><code>--blue</code></div>
+                <div class="swatch" style="background: var(--amber)"><code>--amber</code></div>
+                <div class="swatch on-dark" style="background: var(--pink)"><code>--pink</code></div>
+                <div class="swatch" style="background: var(--sky)"><code>--sky</code></div>
+                <div class="swatch on-dark" style="background: var(--ink)"><code>--ink</code></div>
+                <div class="swatch on-dark" style="background: var(--muted)"><code>--muted</code></div>
+                <div class="swatch swatch--outlined" style="background: var(--faint)"><code>--faint</code></div>
+                <div class="swatch swatch--outlined" style="background: var(--line)"><code>--line</code></div>
+                <div class="swatch swatch--outlined" style="background: var(--surface-2)"><code>--surface-2</code></div>
+              </div>
+
+              <h3 class="mt-8">Les trois tons de chaque accent</h3>
+              <p class="muted">Chaque accent existe en trois variables : la couleur (<code>--green</code>), une version foncée pour du texte (<code>--green-dark</code>) et un fond pastel (<code>--green-soft</code>). Les composants colorés combinent toujours <em>fond soft + texte dark</em>.</p>
+              <div class="grid grid--4 grid--swatches">
+                <div class="swatch swatch--outlined" style="background: var(--green-soft)"><code>--green-soft</code></div>
+                <div class="swatch swatch--outlined" style="background: var(--blue-soft)"><code>--blue-soft</code></div>
+                <div class="swatch swatch--outlined" style="background: var(--amber-soft)"><code>--amber-soft</code></div>
+                <div class="swatch swatch--outlined" style="background: var(--pink-soft)"><code>--pink-soft</code></div>
+                <div class="swatch on-dark" style="background: var(--green-dark)"><code>--green-dark</code></div>
+                <div class="swatch on-dark" style="background: var(--blue-dark)"><code>--blue-dark</code></div>
+                <div class="swatch on-dark" style="background: var(--amber-dark)"><code>--amber-dark</code></div>
+                <div class="swatch on-dark" style="background: var(--pink-dark)"><code>--pink-dark</code></div>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.swatch</code> <code>.swatch--outlined</code> <code>.grid--swatches</code> (nuancier) · Variables : <code>--primary</code> <code>--secondary</code> <code>--green</code> <code>--blue</code> <code>--amber</code> <code>--pink</code> <code>--sky</code> <code>--ink</code> <code>--text</code> <code>--muted</code> <code>--faint</code> <code>--line</code> <code>--surface</code> <code>--surface-2</code></p>
+            </section>
+
+            <!-- ============================================================
+                 DÉGRADÉS
+                 ============================================================ -->
+            <section id="degrades" class="mb-12">
+              <span class="kicker"><code>--gradient-*</code></span>
+              <h2>Dégradés</h2>
+              <p class="muted">Le dégradé « marque » sert aux fonds sombres (hero, bandeau CTA, panneau d'authentification). Le « spectre » est la signature visuelle : barre du hero, liseré du footer, chiffres de la page 404.</p>
+
+              <div class="grid grid--3 grid--swatches">
+                <div class="swatch on-dark" style="background: var(--gradient-brand)"><code>--gradient-brand</code></div>
+                <div class="swatch on-dark" style="background: var(--gradient-teal)"><code>--gradient-teal</code></div>
+                <div class="swatch" style="background: var(--gradient-sky)"><code>--gradient-sky</code></div>
+                <div class="swatch" style="background: var(--gradient-mint)"><code>--gradient-mint</code></div>
+                <div class="swatch" style="background: var(--gradient-sunset)"><code>--gradient-sunset</code></div>
+                <div class="swatch" style="background: var(--gradient-spectrum-x)"><code>--gradient-spectrum-x</code></div>
+              </div>
+
+              <h3 class="mt-8">Bande « spectre »</h3>
+              <p class="muted">Un simple <code>&lt;div class="spectrum-line"&gt;&lt;/div&gt;</code> de 4&nbsp;px de haut, pour souligner un bloc.</p>
+              <div class="spectrum-line" aria-hidden="true"></div>
+              <p class="small muted mt-4">Classes : <code>.spectrum-line</code> · Variables : <code>--gradient-brand</code> <code>--gradient-spectrum</code> <code>--gradient-spectrum-x</code> <code>--gradient-teal</code> <code>--gradient-sky</code> <code>--gradient-mint</code> <code>--gradient-sunset</code></p>
+            </section>
+
+            <!-- ============================================================
+                 TYPOGRAPHIE
+                 ============================================================ -->
+            <section id="typographie" class="mb-12">
+              <span class="kicker">Manrope</span>
+              <h2>Typographie</h2>
+              <p class="muted">Une seule police, Manrope, en graisses 400 à 800. Les titres sont en 800 avec un interlettrage serré ; le texte courant en 400.</p>
+
+              <div class="card card--outlined">
+                <!-- Les <p class="h1"> / <p class="h2"> imitent h1 et h2 (classes propres à cette page) : un seul <h1> par page, et pas de faux <h2> dans le plan du document -->
+                <p class="h1 display mb-2">Display — 3,25 rem</p>
+                <p class="h1 mb-4">Titre h1 — 2,5 rem</p>
+                <p class="h2 mb-4">Titre h2 — 2 rem</p>
+                <h3>Titre h3 — 1,25 rem</h3>
+                <h4>Titre h4 — 1,125 rem</h4>
+                <span class="kicker">Kicker · accroche au-dessus d'un titre</span>
+                <p class="lead">Lead : le paragraphe d'introduction, un peu plus grand et en gris.</p>
+                <p>Paragraphe courant : DakarTech Jobs réunit les offres des entreprises qui recrutent des développeurs, data analysts et designers, de Dakar à Saint-Louis. Un <a class="link" href="#">lien souligné</a> dans le texte.</p>
+                <p class="small">Small : texte secondaire à 0,875 rem, par exemple une légende.</p>
+                <p class="muted">Muted : texte atténué, pour une information moins importante.</p>
+                <p>Code inline : <code>&#123;% url 'detail_offre' offre.id %&#125;</code> ou <code>python manage.py runserver</code>.</p>
+                <p class="mb-0 h1">Un mot en <span class="text-gradient">dégradé</span></p>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.display</code> <code>.kicker</code> <code>.lead</code> <code>.small</code> <code>.muted</code> <code>.faint</code> <code>.link</code> <code>.text-gradient</code> <code>.fw-bold</code> <code>.fw-extra</code> · Balises : <code>h1</code> à <code>h4</code>, <code>p</code>, <code>code</code>. (<code>.h1</code> et <code>.h2</code> donnent le style d'un titre à un autre élément, pour l'aperçu : dans vos templates, utilisez de vraies balises, avec un seul <code>&lt;h1&gt;</code> par page.)</p>
+            </section>
+
+            <!-- ============================================================
+                 BOUTONS
+                 ============================================================ -->
+            <section id="boutons" class="mb-12">
+              <span class="kicker"><code>.btn</code></span>
+              <h2>Boutons</h2>
+              <p class="muted">Un <code>&lt;a&gt;</code> ou un <code>&lt;button&gt;</code> avec la classe <code>.btn</code> et une variante. Un seul bouton <code>--primary</code> par zone : c'est l'action principale.</p>
+
+              <h3>Variantes</h3>
+              <div class="cluster">
+                <button class="btn btn--primary" type="button">Primary</button>
+                <button class="btn btn--secondary" type="button">Secondary</button>
+                <button class="btn btn--soft" type="button">Soft</button>
+                <button class="btn btn--outline" type="button">Outline</button>
+                <button class="btn btn--ghost" type="button">Ghost</button>
+                <button class="btn btn--danger" type="button">Danger</button>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.btn</code> <code>.btn--primary</code> <code>.btn--secondary</code> <code>.btn--soft</code> <code>.btn--outline</code> <code>.btn--ghost</code> <code>.btn--danger</code></p>
+
+              <h3 class="mt-6">Tailles</h3>
+              <div class="cluster">
+                <button class="btn btn--primary btn--sm" type="button">Petit (sm)</button>
+                <button class="btn btn--primary" type="button">Normal</button>
+                <button class="btn btn--primary btn--lg" type="button">Grand (lg)</button>
+                <button class="btn btn--outline btn--sm" type="button">Petit</button>
+                <button class="btn btn--outline" type="button">Normal</button>
+                <button class="btn btn--outline btn--lg" type="button">Grand</button>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.btn--sm</code> <code>.btn--lg</code></p>
+
+              <h3 class="mt-6">Avec icône, désactivé, icône seule</h3>
+              <div class="cluster">
+                <a class="btn btn--primary" href="postuler.html">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                  Postuler
+                </a>
+                <a class="btn btn--outline" href="offres.html">
+                  Voir les offres
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+                <button class="btn btn--soft btn--sm" type="button">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+                  Ajouter
+                </button>
+                <button class="btn btn--primary" type="button" disabled>Désactivé</button>
+                <button class="btn btn--outline" type="button" disabled>Désactivé</button>
+                <button class="btn btn--soft btn--icon" type="button" aria-label="Ajouter aux favoris">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                </button>
+                <button class="btn btn--outline btn--icon btn--sm" type="button" aria-label="Modifier">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+                </button>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.btn--icon</code> (+ <code>aria-label</code>), attribut <code>disabled</code> ou classe <code>.is-disabled</code>. L'icône est un SVG inline de 18&nbsp;px, avant ou après le texte.</p>
+
+              <h3 class="mt-6">Pleine largeur</h3>
+              <div class="grid grid--3">
+                <button class="btn btn--primary btn--block" type="button">Se connecter</button>
+                <button class="btn btn--outline btn--block" type="button">Créer un compte</button>
+                <button class="btn btn--soft btn--block btn--lg" type="button">Postuler</button>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.btn--block</code> (utile dans les formulaires d'authentification).</p>
+
+              <h3 class="mt-6">Sur fond sombre</h3>
+              <div class="card card--dark on-dark">
+                <div class="cluster">
+                  <button class="btn btn--secondary" type="button">Secondary</button>
+                  <button class="btn btn--outline" type="button">Outline</button>
+                  <button class="btn btn--ghost" type="button">Ghost</button>
+                  <button class="btn btn--secondary btn--lg" type="button">Publier une offre</button>
+                </div>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.card--dark.on-dark</code> puis <code>.btn--secondary</code> <code>.btn--outline</code> <code>.btn--ghost</code>. Sur un fond sombre, <code>.on-dark</code> passe automatiquement les boutons outline et ghost en blanc ; n'utilisez pas <code>.btn--primary</code> (teal sur teal).</p>
+            </section>
+
+            <!-- ============================================================
+                 BADGES & CHIPS
+                 ============================================================ -->
+            <section id="badges" class="mb-12">
+              <span class="kicker"><code>.badge</code> · <code>.chip</code></span>
+              <h2>Badges &amp; chips</h2>
+              <p class="muted">Le badge est une étiquette passive (type de contrat, statut). Le chip est un filtre cliquable (<code>&lt;a&gt;</code> ou <code>&lt;button&gt;</code>).</p>
+
+              <h3>Badges</h3>
+              <div class="cluster cluster--sm">
+                <span class="badge">Neutre</span>
+                <span class="badge badge--green">Green</span>
+                <span class="badge badge--blue">Blue</span>
+                <span class="badge badge--amber">Amber</span>
+                <span class="badge badge--pink">Pink</span>
+                <span class="badge badge--sky">Sky</span>
+                <span class="badge badge--primary">Primary</span>
+                <span class="badge badge--dark">Dark</span>
+                <span class="badge badge--outline">Outline</span>
+                <span class="badge badge--green badge--dot">Avec point</span>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.badge</code> <code>.badge--green</code> <code>.badge--blue</code> <code>.badge--amber</code> <code>.badge--pink</code> <code>.badge--sky</code> <code>.badge--primary</code> <code>.badge--dark</code> <code>.badge--outline</code> <code>.badge--dot</code></p>
+
+              <h3 class="mt-6">Convention : types de contrat et mode de travail</h3>
+              <div class="cluster cluster--sm">
+                <span class="badge badge--green">CDI</span>
+                <span class="badge badge--blue">CDD</span>
+                <span class="badge badge--amber">Stage</span>
+                <span class="badge badge--pink">Freelance</span>
+                <span class="badge badge--sky">Alternance</span>
+                <span class="badge">Sur site</span>
+                <span class="badge">Hybride</span>
+                <span class="badge">Télétravail</span>
+              </div>
+              <p class="small muted mt-4">CDI = <code>.badge--green</code>, CDD = <code>.badge--blue</code>, Stage = <code>.badge--amber</code>, Freelance = <code>.badge--pink</code>, Alternance = <code>.badge--sky</code> ; le mode de travail reste un <code>.badge</code> neutre.</p>
+
+              <h3 class="mt-6">Convention : statuts de candidature</h3>
+              <div class="cluster cluster--sm">
+                <span class="badge badge--sky badge--dot">Envoyée</span>
+                <span class="badge badge--blue badge--dot">En cours</span>
+                <span class="badge badge--amber badge--dot">Entretien</span>
+                <span class="badge badge--green badge--dot">Acceptée</span>
+                <span class="badge badge--pink badge--dot">Refusée</span>
+              </div>
+              <p class="small muted mt-4">Toujours avec <code>.badge--dot</code>. En Django : <code>badge--&#123;&#123; candidature.couleur_statut &#125;&#125;</code> (la couleur vient du modèle).</p>
+
+              <h3 class="mt-6">Chips</h3>
+              <div class="cluster cluster--sm">
+                <a class="chip" href="offres.html?q=django">Django</a>
+                <a class="chip is-active" href="offres.html?q=laravel">Laravel</a>
+                <a class="chip" href="offres.html?ville=dakar">Dakar <span class="chip__count">84</span></a>
+                <a class="chip is-active" href="offres.html?ville=thies">Thiès <span class="chip__count">12</span></a>
+                <a class="chip" href="offres.html?q=data">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                  Data
+                </a>
+                <button class="chip" type="button" aria-pressed="false">Télétravail</button>
+                <button class="chip" type="button" aria-pressed="true">Hybride</button>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.chip</code> <code>.chip.is-active</code> (lien vers le filtre actif) <code>.chip__count</code> ; <code>&lt;button class="chip" aria-pressed="false"&gt;</code> bascule tout seul grâce à theme.js.</p>
+            </section>
+
+            <!-- ============================================================
+                 AVATARS, ICON-BOX, POINTS
+                 ============================================================ -->
+            <section id="avatars" class="mb-12">
+              <span class="kicker"><code>.avatar</code> · <code>.icon-box</code></span>
+              <h2>Avatars &amp; icon-box</h2>
+              <p class="muted">L'avatar affiche les deux initiales d'une entreprise (ou d'un candidat). L'icon-box est un carré coloré contenant une icône ou un numéro d'étape. Faites tourner les cinq couleurs.</p>
+
+              <h3>Avatars : couleurs</h3>
+              <div class="cluster">
+                <span class="avatar" aria-hidden="true">Dt</span>
+                <span class="avatar avatar--green" aria-hidden="true">Ba</span>
+                <span class="avatar avatar--blue" aria-hidden="true">So</span>
+                <span class="avatar avatar--amber" aria-hidden="true">Ey</span>
+                <span class="avatar avatar--pink" aria-hidden="true">Ya</span>
+                <span class="avatar avatar--sky" aria-hidden="true">Wa</span>
+                <span class="avatar avatar--dark" aria-hidden="true">Mn</span>
+                <span class="avatar avatar--gradient" aria-hidden="true">Ad</span>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.avatar</code> (défaut) <code>.avatar--green</code> <code>.avatar--blue</code> <code>.avatar--amber</code> <code>.avatar--pink</code> <code>.avatar--sky</code> <code>.avatar--dark</code> <code>.avatar--gradient</code>. En Django : <code>&#123;% cycle 'green' 'blue' 'amber' 'pink' 'sky' %&#125;</code>.</p>
+
+              <h3 class="mt-6">Avatars : tailles et forme ronde</h3>
+              <div class="cluster">
+                <span class="avatar avatar--sm avatar--green" aria-hidden="true">Ba</span>
+                <span class="avatar avatar--blue" aria-hidden="true">So</span>
+                <span class="avatar avatar--lg avatar--amber" aria-hidden="true">Ey</span>
+                <span class="avatar avatar--xl avatar--pink" aria-hidden="true">Ya</span>
+                <span class="avatar avatar--sm avatar--round avatar--sky" aria-hidden="true">Wa</span>
+                <span class="avatar avatar--round avatar--green" aria-hidden="true">Sn</span>
+                <span class="avatar avatar--lg avatar--round avatar--blue" aria-hidden="true">Ex</span>
+                <span class="avatar avatar--xl avatar--round avatar--gradient" aria-hidden="true">Ad</span>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.avatar--sm</code> (36&nbsp;px) · défaut (48&nbsp;px) · <code>.avatar--lg</code> (64&nbsp;px) · <code>.avatar--xl</code> (88&nbsp;px) · <code>.avatar--round</code> pour une personne. Un <code>&lt;img&gt;</code> à l'intérieur remplace les initiales.</p>
+
+              <h3 class="mt-6">Icon-box : couleurs et tailles</h3>
+              <div class="cluster">
+                <span class="icon-box icon-box--green" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+                </span>
+                <span class="icon-box icon-box--blue" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                </span>
+                <span class="icon-box icon-box--amber" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+                </span>
+                <span class="icon-box icon-box--pink" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </span>
+                <span class="icon-box icon-box--sky" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                </span>
+                <span class="icon-box" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg>
+                </span>
+                <span class="icon-box icon-box--dark" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </span>
+              </div>
+              <div class="cluster mt-4">
+                <span class="icon-box icon-box--sm icon-box--green">1</span>
+                <span class="icon-box icon-box--blue">2</span>
+                <span class="icon-box icon-box--lg icon-box--amber">3</span>
+                <span class="icon-box icon-box--lg icon-box--pink" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                </span>
+                <span class="icon-box icon-box--sm icon-box--sky" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                </span>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.icon-box</code> <code>.icon-box--green</code> <code>.icon-box--blue</code> <code>.icon-box--amber</code> <code>.icon-box--pink</code> <code>.icon-box--sky</code> <code>.icon-box--dark</code> · tailles <code>.icon-box--sm</code> (36&nbsp;px) · défaut (44&nbsp;px) · <code>.icon-box--lg</code> (56&nbsp;px). Un numéro à la place de l'icône = étape.</p>
+
+              <h3 class="mt-6">Points colorés</h3>
+              <div class="cluster">
+                <span><span class="dot" aria-hidden="true"></span> Défaut</span>
+                <span><span class="dot dot--green" aria-hidden="true"></span> Acceptée</span>
+                <span><span class="dot dot--blue" aria-hidden="true"></span> En cours</span>
+                <span><span class="dot dot--amber" aria-hidden="true"></span> Entretien</span>
+                <span><span class="dot dot--pink" aria-hidden="true"></span> Refusée</span>
+                <span><span class="dot dot--sky" aria-hidden="true"></span> Envoyée</span>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.dot</code> <code>.dot--green</code> <code>.dot--blue</code> <code>.dot--amber</code> <code>.dot--pink</code> <code>.dot--sky</code> (8&nbsp;px, pour une légende ou un statut discret).</p>
+            </section>
+
+            <!-- ============================================================
+                 CARTES
+                 ============================================================ -->
+            <section id="cartes" class="mb-12">
+              <span class="kicker"><code>.card</code></span>
+              <h2>Cartes</h2>
+              <p class="muted">Jamais d'ombre. Soit aucun trait (<code>.card</code>, <code>.card--tinted</code>), soit un trait fin sur les 4 côtés (<code>.card--outlined</code>). Jamais de bordure sur un seul côté.</p>
+
+              <h3>Variantes</h3>
+              <div class="grid grid--3">
+                <div class="card card--outlined">
+                  <h3 class="card__title">Carte outlined</h3>
+                  <div class="card__body"><p class="small muted">Trait fin sur les 4 côtés. La variante par défaut sur fond blanc.</p></div>
+                </div>
+                <div class="card card--tinted">
+                  <h3 class="card__title">Carte tinted</h3>
+                  <div class="card__body"><p class="small muted">Fond gris-bleu très clair, sans trait. Pour un encart ou une barre latérale.</p></div>
+                </div>
+                <div class="card card--dark on-dark">
+                  <h3 class="card__title">Carte dark</h3>
+                  <div class="card__body"><p class="small">Dégradé marque, toujours avec <code>.on-dark</code>.</p></div>
+                </div>
+              </div>
+
+              <!-- Sur une section teintée (.section--tinted), la carte simple .card (blanche, sans trait) suffit -->
+              <div class="card card--tinted mt-6">
+                <p class="small muted">Sur une section teintée (<code>.section--tinted</code>), la carte blanche sans trait suffit :</p>
+                <div class="grid grid--2">
+                  <div class="card">
+                    <h3 class="card__title">Carte simple</h3>
+                    <div class="card__body"><p class="small muted">Blanche, sans trait : elle se détache du fond teinté.</p></div>
+                  </div>
+                  <div class="card card--interactive">
+                    <h3 class="card__title"><a class="stretched-link" href="offre.html">Carte interactive</a></h3>
+                    <div class="card__body"><p class="small muted">Se soulève au survol. <code>.stretched-link</code> rend toute la carte cliquable.</p></div>
+                    <div class="card__footer">
+                      <span class="badge badge--green">CDI</span>
+                      <span class="small muted">Il y a 2 jours</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.card</code> <code>.card--outlined</code> <code>.card--tinted</code> <code>.card--dark.on-dark</code> <code>.card--interactive</code> <code>.card--compact</code> · éléments <code>.card__title</code> <code>.card__body</code> <code>.card__footer</code> · <code>.stretched-link</code> sur le lien du titre.</p>
+
+              <h3 class="mt-8">Carte offre — ligne (liste des offres)</h3>
+              <!-- Une carte par offre (→ {% for offre in offres %} … {% empty %} … {% endfor %}) -->
+              <div class="offres-list">
+                <article class="card card--outlined card--interactive offre-card">
+                  <div class="avatar avatar--green" aria-hidden="true">Ba</div>
+                  <div>
+                    <h3 class="offre-card__title"><a class="stretched-link" href="offre.html">Développeur Django</a></h3>
+                    <p class="offre-card__meta">
+                      <span>Baamtu</span>
+                      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Dakar</span>
+                    </p>
+                    <ul class="offre-card__tags">
+                      <li class="badge badge--green">CDI</li>
+                      <li class="badge">Hybride</li>
+                    </ul>
+                    <p class="offre-card__desc">Vous rejoignez l'équipe produit pour concevoir des API REST et des interfaces d'administration pour nos clients bancaires.</p>
+                  </div>
+                  <div class="offre-card__aside">
+                    <p class="offre-card__salary">750&nbsp;000 <span>FCFA / mois</span></p>
+                    <p class="offre-card__date">Il y a 2 jours</p>
+                  </div>
+                </article>
+                <article class="card card--outlined card--interactive offre-card">
+                  <div class="avatar avatar--blue" aria-hidden="true">Ex</div>
+                  <div>
+                    <h3 class="offre-card__title"><a class="stretched-link" href="offre.html">Développeur Flutter</a></h3>
+                    <p class="offre-card__meta">
+                      <span>Expresso</span>
+                      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Dakar</span>
+                    </p>
+                    <ul class="offre-card__tags">
+                      <li class="badge badge--sky">Alternance</li>
+                      <li class="badge">Sur site</li>
+                    </ul>
+                  </div>
+                  <div class="offre-card__aside">
+                    <p class="offre-card__salary">300&nbsp;000 <span>FCFA / mois</span></p>
+                    <p class="offre-card__date">Il y a 4 jours</p>
+                  </div>
+                </article>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.card</code> + <code>.card--outlined</code> + <code>.card--interactive</code> + <code>.offre-card</code> · éléments <code>.offre-card__title</code> <code>.offre-card__meta</code> <code>.offre-card__tags</code> <code>.offre-card__desc</code> <code>.offre-card__aside</code> <code>.offre-card__salary</code> <code>.offre-card__date</code> · conteneur <code>.offres-list</code>.</p>
+
+              <h3 class="mt-8">Carte offre — vignette (accueil)</h3>
+              <div class="grid grid--2">
+                <article class="card card--outlined card--interactive offre-card offre-card--grid">
+                  <div class="avatar avatar--amber" aria-hidden="true">Ey</div>
+                  <div>
+                    <h3 class="offre-card__title"><a class="stretched-link" href="offre.html">Développeur NestJS</a></h3>
+                    <p class="offre-card__meta">
+                      <span>Eyone</span>
+                      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Dakar</span>
+                    </p>
+                    <ul class="offre-card__tags">
+                      <li class="badge badge--blue">CDD</li>
+                      <li class="badge">Télétravail</li>
+                    </ul>
+                  </div>
+                  <div class="offre-card__aside">
+                    <p class="offre-card__salary">1&nbsp;200&nbsp;000 <span>FCFA / mois</span></p>
+                    <p class="offre-card__date">Il y a 5 jours</p>
+                  </div>
+                </article>
+                <article class="card card--outlined card--interactive offre-card offre-card--grid">
+                  <div class="avatar avatar--sky" aria-hidden="true">Wa</div>
+                  <div>
+                    <h3 class="offre-card__title"><a class="stretched-link" href="offre.html">Data Analyst</a></h3>
+                    <p class="offre-card__meta">
+                      <span>Wave</span>
+                      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Dakar</span>
+                    </p>
+                    <ul class="offre-card__tags">
+                      <li class="badge badge--amber">Stage</li>
+                      <li class="badge">Sur site</li>
+                    </ul>
+                  </div>
+                  <div class="offre-card__aside">
+                    <p class="offre-card__salary">250&nbsp;000 <span>FCFA / mois</span></p>
+                    <p class="offre-card__date">Il y a 1 semaine</p>
+                  </div>
+                </article>
+              </div>
+              <p class="small muted mt-4">Classes : les mêmes, plus <code>.offre-card--grid</code>, dans une <code>.grid.grid--2</code> ou <code>.grid--3</code>.</p>
+
+              <h3 class="mt-8">Carte entreprise</h3>
+              <div class="grid grid--3">
+                <article class="card card--outlined card--interactive entreprise-card">
+                  <div class="entreprise-card__head">
+                    <div class="avatar avatar--pink" aria-hidden="true">Ya</div>
+                    <div>
+                      <h3 class="entreprise-card__name"><a href="entreprise.html">Yas</a></h3>
+                      <p class="entreprise-card__sector">Télécoms · Mobile money</p>
+                    </div>
+                  </div>
+                  <p class="entreprise-card__desc">Opérateur mobile et services financiers, avec des équipes produit basées à Dakar.</p>
+                  <div class="cluster cluster--sm">
+                    <span class="badge">Dakar</span>
+                    <span class="badge badge--pink">Angular</span>
+                  </div>
+                  <div class="entreprise-card__foot">
+                    <span class="entreprise-card__count">5 offres actives</span>
+                    <a class="btn btn--soft btn--sm" href="entreprise.html">Voir</a>
+                  </div>
+                </article>
+                <article class="card card--outlined card--interactive entreprise-card">
+                  <div class="entreprise-card__head">
+                    <div class="avatar avatar--amber" aria-hidden="true">Ga</div>
+                    <div>
+                      <h3 class="entreprise-card__name"><a href="entreprise.html">Gaïndé 2000</a></h3>
+                      <p class="entreprise-card__sector">Dématérialisation</p>
+                    </div>
+                  </div>
+                  <p class="entreprise-card__desc">Plateforme de dédouanement électronique et de services aux entreprises.</p>
+                  <div class="cluster cluster--sm">
+                    <span class="badge">Dakar</span>
+                    <span class="badge badge--amber">Laravel</span>
+                  </div>
+                  <div class="entreprise-card__foot">
+                    <span class="entreprise-card__count">2 offres actives</span>
+                    <a class="btn btn--soft btn--sm" href="entreprise.html">Voir</a>
+                  </div>
+                </article>
+                <article class="card card--outlined card--interactive entreprise-card">
+                  <div class="entreprise-card__head">
+                    <div class="avatar avatar--sky" aria-hidden="true">Od</div>
+                    <div>
+                      <h3 class="entreprise-card__name"><a href="entreprise.html">Orange Digital Center</a></h3>
+                      <p class="entreprise-card__sector">Formation · Innovation</p>
+                    </div>
+                  </div>
+                  <p class="entreprise-card__desc">École de code, FabLab et accélérateur de start-up à Dakar et Saint-Louis.</p>
+                  <div class="cluster cluster--sm">
+                    <span class="badge">Saint-Louis</span>
+                    <span class="badge badge--sky">Flutter</span>
+                  </div>
+                  <div class="entreprise-card__foot">
+                    <span class="entreprise-card__count">3 offres actives</span>
+                    <a class="btn btn--soft btn--sm" href="entreprise.html">Voir</a>
+                  </div>
+                </article>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.card</code> + <code>.card--outlined</code> + <code>.card--interactive</code> + <code>.entreprise-card</code> · éléments <code>.entreprise-card__head</code> <code>.entreprise-card__name</code> <code>.entreprise-card__sector</code> <code>.entreprise-card__desc</code> <code>.entreprise-card__foot</code> <code>.entreprise-card__count</code>.</p>
+
+              <h3 class="mt-8">Tuiles statistiques</h3>
+              <div class="grid grid--4">
+                <div class="stat stat--green">
+                  <p class="stat__value">128</p>
+                  <p class="stat__label">offres actives</p>
+                </div>
+                <div class="stat stat--blue">
+                  <p class="stat__value">36</p>
+                  <p class="stat__label">entreprises</p>
+                </div>
+                <div class="stat stat--amber">
+                  <p class="stat__value">6</p>
+                  <p class="stat__label">villes</p>
+                </div>
+                <div class="stat stat--pink">
+                  <p class="stat__value">1&nbsp;240</p>
+                  <p class="stat__label">candidats inscrits</p>
+                </div>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.stat</code> <code>.stat--green</code> <code>.stat--blue</code> <code>.stat--amber</code> <code>.stat--pink</code> <code>.stat--sky</code> · éléments <code>.stat__value</code> <code>.stat__label</code>. Fonctionne aussi sur fond sombre (hero).</p>
+
+              <h3 class="mt-8">Carte ville</h3>
+              <!-- Lien vers la liste filtrée (→ {% url 'offres_par_ville' ville.slug %}) -->
+              <div class="grid grid--3">
+                <a class="ville-card" href="offres.html?ville=dakar">
+                  <span class="icon-box icon-box--green" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  </span>
+                  <span class="ville-card__body">
+                    <span class="ville-card__name">Dakar</span>
+                    <span class="ville-card__count">84 offres</span>
+                  </span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+                <a class="ville-card" href="offres.html?ville=thies">
+                  <span class="icon-box icon-box--blue" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  </span>
+                  <span class="ville-card__body">
+                    <span class="ville-card__name">Thiès</span>
+                    <span class="ville-card__count">12 offres</span>
+                  </span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+                <a class="ville-card" href="offres.html?ville=ziguinchor">
+                  <span class="icon-box icon-box--amber" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  </span>
+                  <span class="ville-card__body">
+                    <span class="ville-card__name">Ziguinchor</span>
+                    <span class="ville-card__count">4 offres</span>
+                  </span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.ville-card</code> (fond teinté sur section blanche) ou <code>.ville-card.ville-card--white</code> (sur section teintée) · éléments <code>.ville-card__body</code> <code>.ville-card__name</code> <code>.ville-card__count</code>.</p>
+
+              <h3 class="mt-8">Étapes</h3>
+              <div class="grid grid--3">
+                <div class="step">
+                  <span class="icon-box icon-box--green">1</span>
+                  <h3 class="step__title">Créez votre profil</h3>
+                  <p>Renseignez vos compétences, votre CV et vos préférences.</p>
+                </div>
+                <div class="step">
+                  <span class="icon-box icon-box--blue">2</span>
+                  <h3 class="step__title">Postulez en un clic</h3>
+                  <p>Chaque offre a un formulaire de candidature simple.</p>
+                </div>
+                <div class="step">
+                  <span class="icon-box icon-box--amber">3</span>
+                  <h3 class="step__title">Suivez vos candidatures</h3>
+                  <p>Un tableau de bord indique l'état de chaque candidature.</p>
+                </div>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.step</code> <code>.step__title</code> + un <code>.icon-box</code> numéroté.</p>
+
+              <h3 class="mt-8">Rangée de logos</h3>
+              <div class="logo-row">
+                <a class="logo-row__item" href="entreprise.html"><span class="avatar avatar--sm avatar--green">Ba</span>Baamtu</a>
+                <a class="logo-row__item" href="entreprise.html"><span class="avatar avatar--sm avatar--blue">So</span>Sonatel</a>
+                <a class="logo-row__item" href="entreprise.html"><span class="avatar avatar--sm avatar--amber">Ey</span>Eyone</a>
+                <a class="logo-row__item" href="entreprise.html"><span class="avatar avatar--sm avatar--pink">Ya</span>Yas</a>
+                <a class="logo-row__item" href="entreprise.html"><span class="avatar avatar--sm avatar--sky">Wa</span>Wave</a>
+                <a class="logo-row__item" href="entreprise.html"><span class="avatar avatar--sm avatar--pink">At</span>Atos Sénégal</a>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.logo-row</code> <code>.logo-row__item</code> + un <code>.avatar.avatar--sm</code>.</p>
+            </section>
+
+            <!-- ============================================================
+                 FORMULAIRES
+                 ============================================================ -->
+            <section id="formulaires" class="mb-12">
+              <span class="kicker"><code>.form</code></span>
+              <h2>Formulaires</h2>
+              <p class="muted">Un <code>.form-group</code> par champ : label, contrôle, aide ou erreur. Le <code>&lt;form&gt;</code> Django contient toujours <code>&#123;% csrf_token %&#125;</code> en première ligne.</p>
+
+              <div class="card card--outlined">
+                <!-- En Django : <form method="post" enctype="multipart/form-data">{% csrf_token %} … -->
+                <form class="form" action="#" method="post" data-validate>
+
+                  <!-- Deux champs côte à côte (une seule colonne sur mobile) -->
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label" for="sg-prenom">Prénom <span class="required" aria-hidden="true">*</span></label>
+                      <input class="form-control" type="text" id="sg-prenom" name="prenom" placeholder="Aminata" required>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="sg-nom">Nom <span class="required" aria-hidden="true">*</span></label>
+                      <input class="form-control" type="text" id="sg-nom" name="nom" placeholder="Diallo" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="sg-email">Adresse e-mail</label>
+                    <input class="form-control" type="email" id="sg-email" name="email" placeholder="aminata@exemple.sn">
+                    <p class="form-help mb-0">Nous ne l'utilisons que pour vous répondre.</p>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="sg-ville">Ville</label>
+                    <select class="form-control" id="sg-ville" name="ville">
+                      <option value="">Toutes les villes</option>
+                      <option value="dakar">Dakar</option>
+                      <option value="thies">Thiès</option>
+                      <option value="saint-louis">Saint-Louis</option>
+                      <option value="diamniadio">Diamniadio</option>
+                      <option value="mbour">Mbour</option>
+                      <option value="ziguinchor">Ziguinchor</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="sg-message">Lettre de motivation</label>
+                    <textarea class="form-control" id="sg-message" name="message" placeholder="Présentez-vous en quelques lignes…"></textarea>
+                    <p class="form-help mb-0">500 caractères maximum.</p>
+                  </div>
+
+                  <!-- Champ en erreur : en Django, ajoutez .is-invalid si {{ field.errors }} n'est pas vide -->
+                  <div class="form-group">
+                    <label class="form-label" for="sg-telephone">Téléphone</label>
+                    <input class="form-control is-invalid" type="tel" id="sg-telephone" name="telephone" value="77 12" aria-invalid="true" aria-describedby="sg-telephone-error">
+                    <p class="form-error mb-0" id="sg-telephone-error">Saisissez un numéro à 9 chiffres, par exemple 77&nbsp;123&nbsp;45&nbsp;67.</p>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="sg-offre">Offre concernée</label>
+                    <input class="form-control" type="text" id="sg-offre" name="offre" value="Développeur Django — Baamtu" disabled>
+                    <p class="form-help mb-0">Champ désactivé : la valeur est fixée par la page.</p>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <span class="form-label">Type de contrat</span>
+                      <label class="form-check"><input type="checkbox" name="contrat" value="cdi" checked> <span><strong>CDI</strong></span> <span class="form-check__count">64</span></label>
+                      <label class="form-check"><input type="checkbox" name="contrat" value="cdd"> <span>CDD</span> <span class="form-check__count">22</span></label>
+                      <label class="form-check"><input type="checkbox" name="contrat" value="stage"> <span>Stage</span> <span class="form-check__count">18</span></label>
+                    </div>
+                    <div class="form-group">
+                      <span class="form-label">Mode de travail</span>
+                      <label class="form-check"><input type="radio" name="mode" value="site" checked> <span>Sur site</span></label>
+                      <label class="form-check"><input type="radio" name="mode" value="hybride"> <span>Hybride</span></label>
+                      <label class="form-check"><input type="radio" name="mode" value="remote"> <span>Télétravail</span></label>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <span class="form-label">CV (PDF, 5&nbsp;Mo max.)</span>
+                    <label class="form-file">
+                      <input type="file" name="cv" accept=".pdf">
+                      <span class="btn btn--outline btn--sm">Choisir un fichier</span>
+                      <span class="form-file__name">Aucun fichier sélectionné</span>
+                    </label>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="sg-salaire">Salaire minimum : <output id="sg-salaire-out" for="sg-salaire"></output></label>
+                    <input type="range" id="sg-salaire" name="salaire_min" min="150000" max="2000000" step="50000" value="500000" data-range-output="sg-salaire-out">
+                    <div class="filters__range-values" aria-hidden="true"><span>150&nbsp;000</span><span>2&nbsp;000&nbsp;000 FCFA</span></div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label" for="sg-petit">Champ petit</label>
+                      <input class="form-control form-control--sm" type="text" id="sg-petit" name="petit" placeholder="form-control--sm">
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label" for="sg-grand">Champ grand</label>
+                      <input class="form-control form-control--lg" type="text" id="sg-grand" name="grand" placeholder="form-control--lg">
+                    </div>
+                  </div>
+
+                  <!-- Case obligatoire : dans un .form-group pour que le message de data-validate s'affiche sous la case, pas à côté -->
+                  <div class="form-group">
+                    <label class="form-check">
+                      <input type="checkbox" name="cgu" required>
+                      <span>J'accepte que mes données soient transmises à l'entreprise.</span>
+                    </label>
+                  </div>
+
+                  <div class="form-actions">
+                    <button class="btn btn--primary" type="submit">Envoyer ma candidature</button>
+                    <a class="btn btn--ghost" href="offre.html">Annuler</a>
+                  </div>
+                </form>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.form</code> <code>.form-row</code> <code>.form-row--3</code> <code>.form-group</code> <code>.form-label</code> <code>.required</code> <code>.form-control</code> <code>.form-control--sm</code> <code>.form-control--lg</code> <code>.form-help</code> <code>.form-error</code> <code>.is-invalid</code> <code>.form-check</code> <code>.form-check__count</code> <code>.form-file</code> <code>.form-file__name</code> <code>.filters__range-values</code> <code>.form-actions</code> · attributs JS : <code>data-validate</code> sur le formulaire, <code>data-range-output</code> sur le curseur.</p>
+
+              <h3 class="mt-8">Barre de recherche</h3>
+              <!-- En Django : <form method="get" action="{% url 'liste_offres' %}"> ; les paramètres ?q= et ?ville= sont lus dans request.GET -->
+              <form class="search-bar search-bar--outlined" action="offres.html" method="get" role="search">
+                <label class="search-bar__field">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                  <span class="sr-only">Poste, technologie ou entreprise</span>
+                  <input type="search" name="q" placeholder="Poste, technologie, entreprise…" autocomplete="off">
+                </label>
+                <label class="search-bar__field search-bar__field--select">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <span class="sr-only">Ville</span>
+                  <select name="ville">
+                    <option value="">Toutes les villes</option>
+                    <option value="dakar">Dakar</option>
+                    <option value="thies">Thiès</option>
+                    <option value="saint-louis">Saint-Louis</option>
+                    <option value="diamniadio">Diamniadio</option>
+                    <option value="mbour">Mbour</option>
+                    <option value="ziguinchor">Ziguinchor</option>
+                  </select>
+                </label>
+                <button class="btn btn--primary btn--lg" type="submit">Rechercher</button>
+              </form>
+              <p class="small muted mt-4">Classes : <code>.search-bar</code> <code>.search-bar--outlined</code> (sur fond blanc ; sans le modificateur dans le hero) <code>.search-bar__field</code> <code>.search-bar__field--select</code>.</p>
+
+              <h3 class="mt-8">Rendu par défaut de Django</h3>
+              <p class="muted">Le thème stylise aussi les classes générées par <code>&#123;&#123; form.as_p &#125;&#125;</code> : <code>.errorlist</code>, <code>.helptext</code>, et les <code>&lt;p&gt;</code> d'un <code>.form</code>. Pratique pour démarrer avant de personnaliser champ par champ.</p>
+              <div class="card card--outlined">
+                <!-- Ce que produit {{ form.as_p }} : les erreurs non liées à un champ (nonfield) d'abord,
+                     puis, pour chaque champ en erreur, son .errorlist JUSTE AVANT son <p> (ici : le champ « Titre ») -->
+                <div class="form">
+                  <ul class="errorlist nonfield"><li>Veuillez corriger les erreurs ci-dessous.</li></ul>
+                  <ul class="errorlist"><li>Ce champ est obligatoire.</li></ul>
+                  <p>
+                    <label for="sg-django-titre">Titre :</label>
+                    <input type="text" name="titre" id="sg-django-titre" required>
+                    <span class="helptext">Aide : le titre du poste tel qu'il apparaîtra dans la liste.</span>
+                  </p>
+                  <p>
+                    <label for="sg-django-ville">Ville :</label>
+                    <select name="ville" id="sg-django-ville">
+                      <option value="dakar">Dakar</option>
+                      <option value="thies">Thiès</option>
+                    </select>
+                  </p>
+                </div>
+              </div>
+              <p class="small muted mt-4">Classes (générées par Django) : <code>.errorlist</code> <code>.errorlist.nonfield</code> <code>.helptext</code> ; conteneur <code>.form</code>. Limite de ce rendu : Django place l'<code>.errorlist</code> d'un champ <em>avant</em> son <code>&lt;p&gt;</code> (ci-dessus, « Ce champ est obligatoire » concerne le champ Titre), et le <code>.form</code> les espace autant que le reste : dès qu'un formulaire a plusieurs champs, préférez le rendu champ par champ (<code>.form-group</code> + <code>.form-control</code>), où l'erreur est sous son champ.</p>
+            </section>
+
+            <!-- ============================================================
+                 ALERTES (messages Django)
+                 ============================================================ -->
+            <section id="alertes" class="mb-12">
+              <span class="kicker"><code>.alert</code></span>
+              <h2>Alertes</h2>
+              <p class="muted">Les modificateurs portent les mêmes noms que les tags de <code>django.contrib.messages</code> : <code>alert--&#123;&#123; message.tags &#125;&#125;</code> fonctionne directement.</p>
+
+              <div class="stack">
+                <div class="alert alert--success" role="status">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                  <div class="alert__body">
+                    <span class="alert__title">Candidature envoyée</span>
+                    <p>Baamtu a bien reçu votre dossier pour le poste de Développeur Django.</p>
+                  </div>
+                  <button class="alert__close" type="button" data-dismiss="alert" aria-label="Fermer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                  </button>
+                </div>
+                <div class="alert alert--info" role="status">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                  <div class="alert__body">Nouvelle offre : Sonatel recrute un Développeur Laravel à Dakar. <a href="offre.html">Voir l'offre</a></div>
+                </div>
+                <div class="alert alert--warning" role="alert">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+                  <div class="alert__body">Votre CV date de plus de 6 mois. Pensez à le mettre à jour avant de postuler.</div>
+                </div>
+                <div class="alert alert--error" role="alert">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+                  <div class="alert__body">
+                    <span class="alert__title">Envoi impossible</span>
+                    <p>Le fichier dépasse 5&nbsp;Mo. Compressez votre CV et réessayez.</p>
+                  </div>
+                  <button class="alert__close" type="button" data-dismiss="alert" aria-label="Fermer">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                  </button>
+                </div>
+                <div class="alert alert--debug" role="status">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M20.97 5c0 2.1-1.6 3.8-3.5 4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg>
+                  <div class="alert__body">Debug : vue <code>liste_offres</code>, 12 requêtes SQL, 38&nbsp;ms.</div>
+                </div>
+                <div class="alert alert--primary" role="status">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+                  <div class="alert__body">Bienvenue, Aminata ! Complétez votre profil pour postuler en un clic.</div>
+                </div>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.alert</code> <code>.alert--success</code> <code>.alert--info</code> <code>.alert--warning</code> <code>.alert--error</code> <code>.alert--debug</code> <code>.alert--primary</code> · éléments <code>.alert__body</code> <code>.alert__title</code> <code>.alert__close</code> (avec <code>data-dismiss="alert"</code>).</p>
+
+              <h3 class="mt-8">Liste de messages Django</h3>
+              <!-- {% if messages %} … {% for message in messages %} : un <li> par message, dont l'alerte porte la classe alert--{{ message.tags }} … {% endfor %} {% endif %} -->
+              <ul class="messages">
+                <li>
+                  <div class="alert alert--success" role="status">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                    <div class="alert__body">Votre compte a été créé. Bienvenue sur DakarTech Jobs !</div>
+                    <button class="alert__close" type="button" data-dismiss="alert" aria-label="Fermer">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                    </button>
+                  </div>
+                </li>
+                <li>
+                  <div class="alert alert--info" role="status">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                    <div class="alert__body">3 nouvelles offres correspondent à vos critères.</div>
+                    <button class="alert__close" type="button" data-dismiss="alert" aria-label="Fermer">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+                    </button>
+                  </div>
+                </li>
+              </ul>
+              <p class="small muted mt-4">Classes : <code>&lt;ul class="messages"&gt;</code> puis un <code>&lt;li&gt;</code> par message (theme.js retire le <code>&lt;li&gt;</code> entier à la fermeture).</p>
+            </section>
+
+            <!-- ============================================================
+                 TABLEAUX
+                 ============================================================ -->
+            <section id="tableaux" class="mb-12">
+              <span class="kicker"><code>.table</code></span>
+              <h2>Tableaux</h2>
+              <p class="muted">Toujours dans un <code>.table-wrap</code> : c'est lui qui porte le trait et le défilement horizontal sur mobile.</p>
+
+              <!-- Une ligne par candidature (→ {% for candidature in candidatures %}) -->
+              <div class="table-wrap">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Offre</th>
+                      <th scope="col">Entreprise</th>
+                      <th scope="col">Ville</th>
+                      <th scope="col" class="cell-num">Salaire</th>
+                      <th scope="col">Statut</th>
+                      <th scope="col" class="cell-actions">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><a href="offre.html">Développeur Django</a></td>
+                      <td><div class="cell-primary"><span class="avatar avatar--sm avatar--green" aria-hidden="true">Ba</span>Baamtu</div></td>
+                      <td class="cell-muted">Dakar</td>
+                      <td class="cell-num">750&nbsp;000&nbsp;FCFA</td>
+                      <td><span class="badge badge--amber badge--dot">Entretien</span></td>
+                      <td class="cell-actions">
+                        <a class="btn btn--soft btn--sm" href="offre.html">Voir</a>
+                        <button class="btn btn--ghost btn--sm" type="button">Retirer</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="offre.html">Développeur Laravel</a></td>
+                      <td><div class="cell-primary"><span class="avatar avatar--sm avatar--blue" aria-hidden="true">So</span>Sonatel</div></td>
+                      <td class="cell-muted">Dakar</td>
+                      <td class="cell-num">1&nbsp;200&nbsp;000&nbsp;FCFA</td>
+                      <td><span class="badge badge--blue badge--dot">En cours</span></td>
+                      <td class="cell-actions">
+                        <a class="btn btn--soft btn--sm" href="offre.html">Voir</a>
+                        <button class="btn btn--ghost btn--sm" type="button">Retirer</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="offre.html">Data Analyst</a></td>
+                      <td><div class="cell-primary"><span class="avatar avatar--sm avatar--sky" aria-hidden="true">Wa</span>Wave</div></td>
+                      <td class="cell-muted">Dakar</td>
+                      <td class="cell-num">250&nbsp;000&nbsp;FCFA</td>
+                      <td><span class="badge badge--sky badge--dot">Envoyée</span></td>
+                      <td class="cell-actions">
+                        <a class="btn btn--soft btn--sm" href="offre.html">Voir</a>
+                        <button class="btn btn--ghost btn--sm" type="button">Retirer</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><a href="offre.html">Ingénieur DevOps</a></td>
+                      <td><div class="cell-primary"><span class="avatar avatar--sm avatar--green" aria-hidden="true">Sn</span>Sénégal Numérique</div></td>
+                      <td class="cell-muted">Diamniadio</td>
+                      <td class="cell-num">1&nbsp;500&nbsp;000&nbsp;FCFA</td>
+                      <td><span class="badge badge--green badge--dot">Acceptée</span></td>
+                      <td class="cell-actions">
+                        <a class="btn btn--soft btn--sm" href="offre.html">Voir</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.table-wrap</code> <code>.table</code> <code>.table--compact</code> · cellules <code>.cell-primary</code> (un <code>&lt;div&gt;</code> dans la cellule : avatar + nom) <code>.cell-muted</code> <code>.cell-num</code> (chiffres alignés à droite) <code>.cell-actions</code>.</p>
+            </section>
+
+            <!-- ============================================================
+                 NAVIGATION
+                 ============================================================ -->
+            <section id="navigation" class="mb-12">
+              <span class="kicker"><code>.breadcrumb</code> · <code>.pagination</code> · <code>.tabs</code> · <code>.dropdown</code></span>
+              <h2>Navigation</h2>
+              <p class="muted">Fil d'Ariane, pagination, onglets et menus déroulants. Les onglets et les menus sont animés par theme.js via des attributs <code>data-*</code>.</p>
+
+              <h3>Fil d'Ariane</h3>
+              <nav aria-label="Fil d'Ariane">
+                <ol class="breadcrumb">
+                  <li><a href="index.html">Accueil</a></li>
+                  <li><a href="offres.html">Offres</a></li>
+                  <li aria-current="page">Développeur Django</li>
+                </ol>
+              </nav>
+              <p class="small muted mt-4">Classes : <code>.breadcrumb</code> sur un <code>&lt;ol&gt;</code>, <code>aria-current="page"</code> sur le dernier élément.</p>
+
+              <h3 class="mt-6">Pagination</h3>
+              <!-- En Django : page_obj.has_previous, page_obj.previous_page_number, page_obj.number, paginator.page_range… -->
+              <nav aria-label="Pagination">
+                <ul class="pagination mt-0">
+                  <!-- Lien désactivé : un <span> à la place du <a> ; l'icône garde width/height car theme.css ne dimensionne que « .pagination a svg » -->
+                  <li class="is-disabled"><span aria-disabled="true">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+                    Précédent
+                  </span></li>
+                  <li><a href="offres.html?page=1" aria-current="page">1</a></li>
+                  <li><a href="offres.html?page=2">2</a></li>
+                  <li><a href="offres.html?page=3">3</a></li>
+                  <li><span>…</span></li>
+                  <li><a href="offres.html?page=8">8</a></li>
+                  <li><a href="offres.html?page=2">
+                    Suivant
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                  </a></li>
+                </ul>
+              </nav>
+              <p class="small muted mt-4">Classes : <code>.pagination</code> sur un <code>&lt;ul&gt;</code>, <code>aria-current="page"</code> sur la page courante, <code>.is-disabled</code> sur le <code>&lt;li&gt;</code> (avec un <code>&lt;span&gt;</code> au lieu d'un lien).</p>
+
+              <h3 class="mt-6">Onglets</h3>
+              <div class="tabs" data-tabs role="tablist" aria-label="Sections de l'offre">
+                <button class="tabs__tab" type="button" role="tab" data-tab="sg-description" aria-selected="true" aria-controls="sg-panel-description">Poste</button>
+                <button class="tabs__tab" type="button" role="tab" data-tab="sg-entreprise" aria-selected="false" aria-controls="sg-panel-entreprise">Entreprise</button>
+                <button class="tabs__tab" type="button" role="tab" data-tab="sg-candidatures" aria-selected="false" aria-controls="sg-panel-candidatures">Candidats <span class="badge badge--primary">3</span></button>
+              </div>
+              <div class="card card--outlined mt-4">
+                <div class="tab-panel" data-tab-panel="sg-description" id="sg-panel-description" role="tabpanel">
+                  <h3 class="card__title">Description du poste</h3>
+                  <p class="mb-0">Baamtu recherche un développeur Django pour rejoindre son équipe produit à Dakar : API REST, tests automatisés, déploiement continu.</p>
+                </div>
+                <div class="tab-panel" data-tab-panel="sg-entreprise" id="sg-panel-entreprise" role="tabpanel" hidden>
+                  <h3 class="card__title">À propos de Baamtu</h3>
+                  <p class="mb-0">ESN dakaroise spécialisée en data, intelligence artificielle et développement d'applications sur mesure. 120 collaborateurs.</p>
+                </div>
+                <div class="tab-panel" data-tab-panel="sg-candidatures" id="sg-panel-candidatures" role="tabpanel" hidden>
+                  <h3 class="card__title">3 candidatures</h3>
+                  <p class="mb-0">Aminata Diallo (entretien), Moussa Ndiaye (en cours), Fatou Sarr (envoyée).</p>
+                </div>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.tabs</code> (avec <code>data-tabs</code>) <code>.tabs__tab</code> (avec <code>data-tab="x"</code> et <code>aria-selected</code>) ; panneaux <code>.tab-panel</code> avec <code>data-tab-panel="x"</code>, les inactifs portent <code>hidden</code>.</p>
+
+              <h3 class="mt-6">Menu déroulant</h3>
+              <div class="cluster">
+                <span class="small muted">Menu utilisateur (header, une fois connecté) :</span>
+                <div class="dropdown ml-auto" data-dropdown>
+                  <button class="user-menu" type="button" data-dropdown-toggle aria-expanded="false" aria-haspopup="true">
+                    <span class="avatar avatar--sm avatar--round avatar--gradient" aria-hidden="true">Ad</span>
+                    Aminata
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+                  </button>
+                  <div class="dropdown__menu">
+                    <div class="dropdown__head">Connectée en tant qu'<strong>Aminata Diallo</strong></div>
+                    <a class="dropdown__item" href="candidatures.html">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+                      Mes candidatures
+                    </a>
+                    <a class="dropdown__item" href="#">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                      Mon profil
+                    </a>
+                    <div class="dropdown__sep" role="separator"></div>
+                    <!-- En Django, la déconnexion est un POST : <form method="post" action="{% url 'logout' %}">{% csrf_token %}<button class="dropdown__item dropdown__item--danger">…</button></form> -->
+                    <button class="dropdown__item dropdown__item--danger" type="button">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="m16 17 5-5-5-5"/><path d="M21 12H9"/></svg>
+                      Se déconnecter
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.dropdown</code> (avec <code>data-dropdown</code>), bouton <code>data-dropdown-toggle</code> (ici un <code>.user-menu</code>), <code>.dropdown__menu</code> <code>.dropdown__head</code> <code>.dropdown__item</code> <code>.dropdown__item--danger</code> <code>.dropdown__sep</code>. Le menu se ferme au clic extérieur ou avec Échap.</p>
+
+              <h3 class="mt-6">Accroche de section</h3>
+              <div class="section__head mb-0">
+                <div>
+                  <span class="kicker">À la une</span>
+                  <h3 class="mb-0">Dernières offres publiées</h3>
+                </div>
+                <a class="btn btn--outline btn--sm" href="offres.html">
+                  Voir les 128 offres
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.section__head</code> (accroche + titre à gauche, lien à droite) avec un <code>.kicker</code> au-dessus du titre.</p>
+            </section>
+
+            <!-- ============================================================
+                 BLOCS SOMBRES
+                 ============================================================ -->
+            <section id="blocs" class="mb-12">
+              <span class="kicker"><code>.cta-band</code> · <code>.hero</code></span>
+              <h2>Blocs sombres</h2>
+              <p class="muted">Les seuls fonds sombres du thème : le dégradé « marque », toujours accompagné de <code>.on-dark</code> qui adapte titres, textes, boutons, badges et chips. L'en-tête sombre (<code>.page-head--dark.on-dark</code>) suit le même principe, en pleine largeur.</p>
+
+              <h3>Bandeau d'appel à l'action</h3>
+              <div class="cta-band on-dark">
+                <div>
+                  <span class="kicker">Recruteurs</span>
+                  <h3>Vous recrutez un profil tech ?</h3>
+                  <p>Publiez votre offre en quelques minutes et touchez plus de 1&nbsp;200 candidats qualifiés au Sénégal.</p>
+                </div>
+                <div class="cta-band__actions">
+                  <a class="btn btn--secondary btn--lg" href="inscription.html">Publier une offre</a>
+                  <a class="btn btn--outline btn--lg" href="contact.html">Nous contacter</a>
+                </div>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.cta-band.on-dark</code> <code>.cta-band__actions</code> ; à placer dans un <code>.container</code>. Le titre est un <code>&lt;h2&gt;</code> dans les vraies pages.</p>
+
+              <h3 class="mt-8">Hero compact</h3>
+              <!-- Section en pleine largeur dans les vraies pages (hors .container) ; le titre y est un h1 -->
+              <div class="hero hero--compact on-dark">
+                <div class="container">
+                  <span class="kicker">Emploi tech · Sénégal</span>
+                  <h3 class="hero__title">Trouvez votre prochain <em>job tech</em> au Sénégal.</h3>
+                  <p class="hero__lead">Les offres des entreprises qui recrutent des développeurs, data analysts et designers, de Dakar à Saint-Louis.</p>
+                  <form class="search-bar hero__search" action="offres.html" method="get" role="search">
+                    <label class="search-bar__field">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                      <span class="sr-only">Poste, technologie ou entreprise</span>
+                      <input type="search" name="q" placeholder="Poste, technologie, entreprise…" autocomplete="off">
+                    </label>
+                    <label class="search-bar__field search-bar__field--select">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                      <span class="sr-only">Ville</span>
+                      <select name="ville">
+                        <option value="">Toutes les villes</option>
+                        <option value="dakar">Dakar</option>
+                        <option value="thies">Thiès</option>
+                        <option value="saint-louis">Saint-Louis</option>
+                      </select>
+                    </label>
+                    <button class="btn btn--primary btn--lg" type="submit">Rechercher</button>
+                  </form>
+                  <div class="hero__chips">
+                    <span>Populaires :</span>
+                    <a class="chip" href="offres.html?q=django">Django</a>
+                    <a class="chip" href="offres.html?q=flutter">Flutter</a>
+                    <a class="chip" href="offres.html?q=devops">DevOps</a>
+                  </div>
+                </div>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.hero.on-dark</code> (+ <code>.hero--compact</code>) <code>.hero__title</code> (avec un <code>&lt;em&gt;</code> coloré) <code>.hero__lead</code> <code>.hero__search</code> <code>.hero__chips</code> <code>.hero__stats</code>. Ici sans <code>.search-bar--outlined</code> : le bloc blanc se détache déjà du fond sombre.</p>
+            </section>
+
+            <!-- ============================================================
+                 ÉTATS
+                 ============================================================ -->
+            <section id="etats" class="mb-0">
+              <span class="kicker"><code>.empty</code> · <code>.error-page</code></span>
+              <h2>États</h2>
+              <p class="muted">Un état vide pour les listes sans résultat, une page d'erreur pour les 404 / 500, et le lien d'évitement pour l'accessibilité.</p>
+
+              <h3>État vide</h3>
+              <!-- Correspond au bloc {% empty %} d'un {% for %} -->
+              <div class="empty">
+                <span class="icon-box icon-box--lg icon-box--sky" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+                </span>
+                <h3>Aucune offre ne correspond</h3>
+                <p>Essayez avec d'autres mots-clés ou élargissez la recherche à toutes les villes.</p>
+                <a class="btn btn--primary" href="offres.html">Réinitialiser les filtres</a>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.empty</code> + un <code>.icon-box.icon-box--lg</code>, un titre, un paragraphe et un bouton.</p>
+
+              <h3 class="mt-8">Page d'erreur</h3>
+              <div class="text-center">
+                <p class="error-page__code">404</p>
+                <h3>Page introuvable</h3>
+                <p class="lead mb-0">L'offre a peut-être été pourvue ou l'adresse contient une faute de frappe.</p>
+              </div>
+              <p class="small muted mt-4">Classes : <code>.error-page</code> (section entière, centrée) <code>.error-page__code</code> (chiffres en dégradé spectre) ; voir <a href="404.html">404.html</a>. Le fichier <code>templates/404.html</code> est servi automatiquement par Django quand <code>DEBUG = False</code>.</p>
+
+              <h3 class="mt-8">Lien d'évitement</h3>
+              <p class="mb-0">Le <code>.skip-link</code> (« Aller au contenu ») est le premier élément du <code>&lt;body&gt;</code> ; invisible tant qu'il n'a pas le focus, il apparaît en haut à gauche quand on appuie sur <kbd>Tab</kbd> en arrivant sur la page. Il pointe vers <code>&lt;main id="main"&gt;</code>. Pas d'exemple visuel ici : essayez-le en haut de cette page.</p>
+            </section>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       FOOTER — commun à toutes les pages (→ templates/base.html)
+       ==================================================================== -->
+  <footer class="site-footer on-dark">
+    <div class="container site-footer__inner">
+      <div>
+        <a class="brand" href="index.html">
+          <img class="brand__mark" src="assets/logo.svg" alt="" width="36" height="36">
+          <span class="brand__name">DakarTech<strong>Jobs</strong></span>
+        </a>
+        <p class="site-footer__about">
+          La plateforme d'emploi dédiée aux métiers du numérique au Sénégal.
+          Projet pédagogique réalisé avec Django.
+        </p>
+      </div>
+      <div>
+        <h3 class="site-footer__title">Candidats</h3>
+        <ul class="site-footer__links">
+          <li><a href="offres.html">Toutes les offres</a></li>
+          <li><a href="entreprises.html">Entreprises</a></li>
+          <li><a href="inscription.html">Créer un compte</a></li>
+          <li><a href="candidatures.html">Mes candidatures</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="site-footer__title">Recruteurs</h3>
+        <ul class="site-footer__links">
+          <li><a href="inscription.html">Publier une offre</a></li>
+          <li><a href="contact.html">Nous contacter</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="site-footer__title">À propos</h3>
+        <ul class="site-footer__links">
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Mentions légales</a></li>
+          <li><a href="#">Confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom-wrap">
+      <div class="container site-footer__bottom">
+        <span>© 2026 DakarTech Jobs — Dakar Institute of Technology</span>
+        <span class="cluster">
+          <a href="#">Mentions légales</a>
+          <a href="#">Confidentialité</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+</body>
+</html>

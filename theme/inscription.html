@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inscription — DakarTech Jobs</title>
+  <meta name="description" content="Créez votre compte DakarTech Jobs pour postuler en un clic et suivre vos candidatures.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <!-- ====================================================================
+       HEADER — commun à toutes les pages (→ templates/base.html)
+       ==================================================================== -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html">
+        <img class="brand__mark" src="assets/logo.svg" alt="" width="36" height="36">
+        <span class="brand__name">DakarTech<strong>Jobs</strong></span>
+      </a>
+
+      <button class="nav-toggle" type="button" data-toggle="nav" aria-controls="site-nav" aria-expanded="false" aria-label="Ouvrir le menu">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Navigation principale">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="index.html">Accueil</a></li>
+          <li><a class="site-nav__link" href="offres.html">Offres</a></li>
+          <li><a class="site-nav__link" href="entreprises.html">Entreprises</a></li>
+          <li><a class="site-nav__link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="site-nav__actions">
+          <a class="btn btn--ghost" href="connexion.html">Connexion</a>
+          <a class="btn btn--primary" href="inscription.html">Créer un compte</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       CONTENU DE LA PAGE (→ {% block content %})
+       Vue Django : inscription (UserCreationForm) → templates/registration/inscription.html
+       ==================================================================== -->
+  <main id="main">
+
+    <!-- Mise en page « auth » : panneau sombre à gauche, formulaire à droite -->
+    <div class="auth">
+
+      <!-- Panneau de présentation (fond dégradé « marque », toujours avec .on-dark) -->
+      <aside class="auth__panel on-dark" aria-label="Pourquoi créer un compte">
+        <div>
+          <span class="kicker">Gratuit</span>
+          <h2>Créez votre compte en une minute.</h2>
+          <p>
+            Rejoignez plus de 1&nbsp;200 candidats et recevez les offres des entreprises
+            tech du Sénégal, de Dakar à Saint-Louis. Sans engagement.
+          </p>
+        </div>
+
+        <!-- Avantages : la coche verte claire est voulue, elle reste lisible sur fond sombre -->
+        <ul class="list-check">
+          <li>Alertes e-mail sur les nouvelles offres</li>
+          <li>Candidature en un clic avec votre CV</li>
+          <li>Suivi de vos candidatures</li>
+          <li>Visibilité auprès de 36 entreprises</li>
+        </ul>
+
+        <!-- Chiffres clés (→ variables de contexte de la vue, ex. nb_candidats, nb_recrutements) -->
+        <div class="grid grid--2">
+          <div class="stat stat--pink">
+            <p class="stat__value">1&nbsp;240</p>
+            <p class="stat__label">candidats inscrits</p>
+          </div>
+          <div class="stat stat--amber">
+            <p class="stat__value">48</p>
+            <p class="stat__label">recrutements ce mois</p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Formulaire d'inscription -->
+      <div class="auth__form">
+        <div class="auth__card">
+          <h1 class="auth__title">Créer un compte</h1>
+          <p class="auth__lead">Quelques informations suffisent pour commencer à postuler.</p>
+
+          <!-- Erreurs globales (→ {{ form.non_field_errors }}) :
+               <div class="alert alert--error">Les deux mots de passe ne correspondent pas.</div> -->
+
+          <!-- En Django : <form method="post" action="{% url 'inscription' %}"> puis {% csrf_token %} -->
+          <form class="form" method="post" action="#" data-validate>
+
+            <!-- Champ par champ (→ {{ form.first_name }}, {{ form.last_name }}…) -->
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="first_name">Prénom</label>
+                <input class="form-control" type="text" id="first_name" name="first_name" placeholder="Aminata" autocomplete="given-name" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="last_name">Nom</label>
+                <input class="form-control" type="text" id="last_name" name="last_name" placeholder="Diop" autocomplete="family-name" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="email">E-mail</label>
+              <input class="form-control" type="email" id="email" name="email" placeholder="aminata.diop@exemple.sn" autocomplete="email" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="password1">Mot de passe</label>
+              <input class="form-control" type="password" id="password1" name="password1" autocomplete="new-password" minlength="8" aria-describedby="password1-help" required>
+              <!-- → {{ form.password1.help_text }} -->
+              <p class="form-help" id="password1-help">8 caractères minimum, avec au moins un chiffre</p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="password2">Confirmer le mot de passe</label>
+              <input class="form-control" type="password" id="password2" name="password2" autocomplete="new-password" minlength="8" required>
+              <!-- Erreur de champ (→ {{ form.password2.errors }}) :
+                   <p class="form-error">Les deux mots de passe ne correspondent pas.</p> -->
+            </div>
+
+            <!-- Rôle : un legend avec la classe .form-label pour rester à la taille d'une étiquette -->
+            <fieldset>
+              <legend class="form-label">Je suis</legend>
+              <div class="form-row">
+                <label class="form-check">
+                  <input type="radio" name="role" value="candidat" checked>
+                  <span>Candidat</span>
+                </label>
+                <label class="form-check">
+                  <input type="radio" name="role" value="recruteur">
+                  <span>Recruteur</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <!-- Le .form-group permet au message d'erreur généré (data-validate) de s'afficher sous la case -->
+            <div class="form-group">
+              <label class="form-check">
+                <input type="checkbox" name="conditions" value="1" required data-error="Vous devez accepter les conditions d'utilisation.">
+                <span>J'accepte les <a href="#">conditions d'utilisation</a></span>
+              </label>
+            </div>
+
+            <button class="btn btn--primary btn--lg btn--block" type="submit">Créer mon compte</button>
+          </form>
+
+          <!-- → <a href="{% url 'connexion' %}"> -->
+          <p class="auth__foot">Déjà inscrit ? <a href="connexion.html">Se connecter</a></p>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ====================================================================
+       FOOTER — commun à toutes les pages (→ templates/base.html)
+       ==================================================================== -->
+  <footer class="site-footer on-dark">
+    <div class="container site-footer__inner">
+      <div>
+        <a class="brand" href="index.html">
+          <img class="brand__mark" src="assets/logo.svg" alt="" width="36" height="36">
+          <span class="brand__name">DakarTech<strong>Jobs</strong></span>
+        </a>
+        <p class="site-footer__about">
+          La plateforme d'emploi dédiée aux métiers du numérique au Sénégal.
+          Projet pédagogique réalisé avec Django.
+        </p>
+      </div>
+      <div>
+        <h3 class="site-footer__title">Candidats</h3>
+        <ul class="site-footer__links">
+          <li><a href="offres.html">Toutes les offres</a></li>
+          <li><a href="entreprises.html">Entreprises</a></li>
+          <li><a href="inscription.html">Créer un compte</a></li>
+          <li><a href="candidatures.html">Mes candidatures</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="site-footer__title">Recruteurs</h3>
+        <ul class="site-footer__links">
+          <li><a href="inscription.html">Publier une offre</a></li>
+          <li><a href="contact.html">Nous contacter</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="site-footer__title">À propos</h3>
+        <ul class="site-footer__links">
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Mentions légales</a></li>
+          <li><a href="#">Confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom-wrap">
+      <div class="container site-footer__bottom">
+        <span>© 2026 DakarTech Jobs — Dakar Institute of Technology</span>
+        <span class="cluster">
+          <a href="#">Mentions légales</a>
+          <a href="#">Confidentialité</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+</body>
+</html>

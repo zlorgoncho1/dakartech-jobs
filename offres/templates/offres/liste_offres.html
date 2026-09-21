@@ -1,0 +1,12 @@
+{% extends 'base.html' %} 
+{% block titre %} Offres {% endblock %} 
+{% block contenu %}
+<h1>Liste des offres - DAKARTECH JOBS - DEPUIS LA RACINE</h1>
+<ul class="offres">
+  {% for offre in offres %}
+  <li>{{ offre.titre }} chez {{ offre.entreprise }}</li>
+  {% empty %}
+  <li>Aucune offre pour le moment</li>
+  {% endfor %}
+</ul>
+{% endblock %}

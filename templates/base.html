@@ -1,0 +1,21 @@
+{% load static %}
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title> {% block titre %} &middot; DakarTech Jobs {% endblock %} </title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="{% url 'accueil' %}">DakarTech Jobs</a>
+      <nav>
+        <a href="{% url 'offres:liste' %}">Offres</a>
+        <a href="{% url 'contact' %}">Contact</a>
+      </nav>
+    </header>
+    <main>
+        {% block contenu %}{% endblock %}
+    </main>
+  </body>
+</html>

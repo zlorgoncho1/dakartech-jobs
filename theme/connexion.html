@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Connexion — DakarTech Jobs</title>
+  <meta name="description" content="Connectez-vous à votre compte DakarTech Jobs pour suivre vos candidatures et postuler en un clic.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <!-- ====================================================================
+       HEADER — commun à toutes les pages (→ templates/base.html)
+       ==================================================================== -->
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html">
+        <img class="brand__mark" src="assets/logo.svg" alt="" width="36" height="36">
+        <span class="brand__name">DakarTech<strong>Jobs</strong></span>
+      </a>
+
+      <button class="nav-toggle" type="button" data-toggle="nav" aria-controls="site-nav" aria-expanded="false" aria-label="Ouvrir le menu">
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+        <span class="nav-toggle__bar"></span>
+      </button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Navigation principale">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="index.html">Accueil</a></li>
+          <li><a class="site-nav__link" href="offres.html">Offres</a></li>
+          <li><a class="site-nav__link" href="entreprises.html">Entreprises</a></li>
+          <li><a class="site-nav__link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="site-nav__actions">
+          <a class="btn btn--ghost" href="connexion.html">Connexion</a>
+          <a class="btn btn--primary" href="inscription.html">Créer un compte</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ====================================================================
+       CONTENU DE LA PAGE (→ {% block content %})
+       Vue : django.contrib.auth.views.LoginView (template registration/login.html)
+       ==================================================================== -->
+  <main id="main">
+
+    <!-- Mise en page « auth » : panneau sombre à gauche, formulaire à droite -->
+    <div class="auth">
+
+      <!-- Panneau de marque (fond dégradé, donc .on-dark) -->
+      <aside class="auth__panel on-dark">
+        <div>
+          <span class="kicker">DakarTech Jobs</span>
+          <h2>Reprenez votre recherche là où vous l'avez laissée.</h2>
+          <p>
+            Retrouvez vos offres enregistrées, suivez l'état de vos candidatures
+            et postulez en un clic auprès des entreprises tech du Sénégal.
+          </p>
+        </div>
+
+        <blockquote class="auth__quote">
+          « J'ai décroché mon poste de Data Analyst chez Wave en trois semaines. »
+          <footer>Aminata Diop — Data Analyst, Wave</footer>
+        </blockquote>
+
+        <div class="grid grid--2">
+          <div class="stat stat--green">
+            <p class="stat__value">128</p>
+            <p class="stat__label">offres actives</p>
+          </div>
+          <div class="stat stat--blue">
+            <p class="stat__value">36</p>
+            <p class="stat__label">entreprises</p>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Formulaire de connexion -->
+      <div class="auth__form">
+        <div class="auth__card">
+          <h1 class="auth__title">Connexion</h1>
+          <p class="auth__lead">Heureux de vous revoir.</p>
+
+          <!-- Erreurs globales du formulaire (→ {{ form.non_field_errors }}) :
+               <ul class="errorlist nonfield"><li>Identifiants incorrects.</li></ul> -->
+
+          <!-- En Django : <form method="post"> + {% csrf_token %} en première ligne -->
+          <form class="form" method="post" action="#" data-validate>
+            <!-- {% csrf_token %} -->
+            <!-- équivalent : {{ form.username }} / {{ form.password }} -->
+
+            <div class="form-group">
+              <label class="form-label" for="email">Adresse e-mail</label>
+              <input class="form-control" type="email" id="email" name="username"
+                     placeholder="vous@exemple.sn" autocomplete="email" required
+                     data-error="Veuillez saisir votre adresse e-mail.">
+            </div>
+
+            <div class="form-group">
+              <div class="split">
+                <label class="form-label" for="password">Mot de passe</label>
+                <a class="small" href="#">Mot de passe oublié ?</a>
+              </div>
+              <input class="form-control" type="password" id="password" name="password"
+                     placeholder="••••••••" autocomplete="current-password" required
+                     data-error="Veuillez saisir votre mot de passe.">
+            </div>
+
+            <label class="form-check">
+              <input type="checkbox" name="remember" value="1">
+              <span>Se souvenir de moi</span>
+            </label>
+
+            <!-- Redirection après connexion (→ <input type="hidden" name="next" value="{{ next }}">) -->
+
+            <button class="btn btn--primary btn--lg btn--block" type="submit">
+              Se connecter
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="m10 17 5-5-5-5"/><path d="M15 12H3"/></svg>
+            </button>
+          </form>
+
+          <!-- → {% url 'inscription' %} -->
+          <p class="auth__foot">Pas encore de compte ? <a href="inscription.html">Créer un compte</a></p>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ====================================================================
+       FOOTER — commun à toutes les pages (→ templates/base.html)
+       ==================================================================== -->
+  <footer class="site-footer on-dark">
+    <div class="container site-footer__inner">
+      <div>
+        <a class="brand" href="index.html">
+          <img class="brand__mark" src="assets/logo.svg" alt="" width="36" height="36">
+          <span class="brand__name">DakarTech<strong>Jobs</strong></span>
+        </a>
+        <p class="site-footer__about">
+          La plateforme d'emploi dédiée aux métiers du numérique au Sénégal.
+          Projet pédagogique réalisé avec Django.
+        </p>
+      </div>
+      <div>
+        <h3 class="site-footer__title">Candidats</h3>
+        <ul class="site-footer__links">
+          <li><a href="offres.html">Toutes les offres</a></li>
+          <li><a href="entreprises.html">Entreprises</a></li>
+          <li><a href="inscription.html">Créer un compte</a></li>
+          <li><a href="candidatures.html">Mes candidatures</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="site-footer__title">Recruteurs</h3>
+        <ul class="site-footer__links">
+          <li><a href="inscription.html">Publier une offre</a></li>
+          <li><a href="contact.html">Nous contacter</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="site-footer__title">À propos</h3>
+        <ul class="site-footer__links">
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Mentions légales</a></li>
+          <li><a href="#">Confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="site-footer__bottom-wrap">
+      <div class="container site-footer__bottom">
+        <span>© 2026 DakarTech Jobs — Dakar Institute of Technology</span>
+        <span class="cluster">
+          <a href="#">Mentions légales</a>
+          <a href="#">Confidentialité</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/theme.js"></script>
+</body>
+</html>
