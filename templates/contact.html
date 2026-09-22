@@ -1,8 +1,271 @@
 {% extends 'base.html' %}
+{% block titre_page %}Contact{% endblock %}
+{% block titre_description %} 
+Contactez l'équipe DakarTech Jobs : une question, un compte
+recruteur à ouvrir ou un partenariat à proposer. 
+{% endblock %}
 
-{% block titre %} Contact {% endblock %}
+{% block main %}
+<!-- En-tête de page (fond teinté clair) -->
+<section class="page-head">
+  <div class="container">
+    <span class="kicker">Contact</span>
+    <h1 class="page-head__title">Parlons de votre projet</h1>
+    <p class="page-head__lead">
+      Une question sur une offre, un compte recruteur à ouvrir ou un partenariat
+      à proposer ? L'équipe DakarTech Jobs vous répond sous 48&nbsp;h ouvrées.
+    </p>
+  </div>
+</section>
 
-{% block contenu %}
-<h1>Contact</h1>
-<p class="lede">Vous pouvez nous contacter à l'adresse suivante: <a href="contact@dakartech-jobs.com">contact@dakartech-jobs.com</a></p>
+<!-- Formulaire (à gauche) + coordonnées (à droite) : .contact-grid passe sur une colonne sous 900px -->
+<section class="section">
+  <div class="container">
+    <div class="contact-grid">
+      <!-- Formulaire de contact (→ forms.py : ContactForm) -->
+      <div class="card card--outlined">
+        <h2>Envoyez-nous un message</h2>
+        <p class="muted">
+          Tous les champs marqués d'un astérisque sont obligatoires.
+        </p>
+
+        {# <!-- Confirmation après envoi (→ {% for message in messages %}) : #}
+                {#   <div class="alert alert--success">Merci, votre message a bien été envoyé.</div> -->#} 
+                {# <!-- En Django : <form method="post" action="{% url 'page_contact' %}"> puis {% csrf_token %} --> #}
+        <form class="form" method="post" data-validate>
+          {% csrf_token %}
+          <div class="form-row">
+            {% for champ in contact_form %}
+              {% if champ.name == "fullname" or champ.name == "email" %}
+              <div class="form-group">
+                <label class="form-label" for="nom"
+                  >Nom complet
+                  <span class="required" aria-hidden="true">*</span></label
+                >
+                {{ champ }}
+              </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+      
+          <div class="form-group">
+            <label class="form-label" for="sujet">Sujet</label>
+            <select class="form-control" id="sujet" name="sujet">
+              <option value="candidat">Je suis candidat</option>
+              <option value="recruteur">Je suis recruteur</option>
+              <option value="partenariat">Partenariat</option>
+              <option value="autre">Autre</option>
+            </select>
+          </div>
+      
+          <div class="form-group">
+            <label class="form-label" for="message"
+              >Message <span class="required" aria-hidden="true">*</span></label
+            >
+            <textarea
+              class="form-control"
+              id="message"
+              name="message"
+              placeholder="Bonjour, je souhaite publier une offre de développeur Django à Dakar…"
+              required
+              data-error="Écrivez votre message avant d'envoyer."
+            ></textarea>
+            <!-- Erreur de champ (→ {{ form.message.errors }}) :
+                       <p class="form-error">Ce champ est obligatoire.</p> -->
+          </div>
+      
+          <div class="form-group">
+            <label class="form-check">
+              <input type="checkbox" name="newsletter" value="1" />
+              <span
+                ><strong>Recevoir la newsletter</strong> — les nouvelles offres
+                tech au Sénégal, une fois par semaine.</span
+              >
+            </label>
+          </div>
+      
+          <div class="form-actions">
+            <button class="btn btn--primary" type="submit">
+              Envoyer
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="m22 2-7 20-4-9-9-4Z" />
+                <path d="M22 2 11 13" />
+              </svg>
+            </button>
+            <span class="form-help"
+              >Nous ne partageons jamais votre adresse.</span
+            >
+          </div>
+        </form>
+      </div>
+
+      <!-- Coordonnées (→ variables de contexte de la vue, ou valeurs de settings.py) -->
+      <div class="stack stack--lg">
+        <div class="contact-item">
+          <span class="icon-box icon-box--blue" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect width="20" height="16" x="2" y="4" rx="2" />
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </svg>
+          </span>
+          <div>
+            <h3>E-mail</h3>
+            <p>contact@dakartechjobs.sn</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span class="icon-box icon-box--green" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"
+              />
+            </svg>
+          </span>
+          <div>
+            <h3>Téléphone</h3>
+            <p>+221&nbsp;33&nbsp;800&nbsp;00&nbsp;00</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span class="icon-box icon-box--amber" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+          </span>
+          <div>
+            <h3>Adresse</h3>
+            <p>Dakar Institute of Technology, Dakar, Sénégal</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span class="icon-box icon-box--pink" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
+            </svg>
+          </span>
+          <div>
+            <h3>Horaires</h3>
+            <p>Lundi – vendredi, 9&nbsp;h – 18&nbsp;h</p>
+          </div>
+        </div>
+
+        <!-- Carte sombre : fond dégradé « marque », toujours avec .on-dark -->
+        <div class="card card--dark on-dark">
+          <span class="kicker">Recruteurs</span>
+          <h3>Vous recrutez ?</h3>
+          <p>
+            Créez un compte recruteur et publiez votre première offre en
+            quelques minutes : elle sera visible par plus de 1&nbsp;200
+            candidats.
+          </p>
+          {# <!-- Lien → {% url 'inscription' %} --> #}
+          <a class="btn btn--secondary" href="inscription.html"
+            >Publier une offre</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Questions fréquentes (cartes blanches sans trait, sur section teintée) -->
+<section class="section section--tinted">
+  <div class="container">
+    <div class="section__head">
+      <div>
+        <span class="kicker">FAQ</span>
+        <h2>Questions fréquentes</h2>
+      </div>
+    </div>
+
+    {# <!-- Une carte par question (→ {% for question in faq %}) --> #}
+    <div class="grid grid--2">
+      <article class="card">
+        <h3 class="card__title">
+          La plateforme est-elle gratuite pour les candidats ?
+        </h3>
+        <div class="card__body">
+          <p>
+            Oui, entièrement. Créer un compte, consulter les offres et postuler
+            ne coûte rien aux candidats, et ne coûtera jamais rien.
+          </p>
+        </div>
+      </article>
+      <article class="card">
+        <h3 class="card__title">Comment publier une offre ?</h3>
+        <div class="card__body">
+          <p>
+            <a class="link" href="inscription.html">Créez un compte recruteur</a
+            >, renseignez votre entreprise, puis remplissez le formulaire de
+            publication : titre, ville, type de contrat, salaire en FCFA et
+            description. L'offre est en ligne après validation.
+          </p>
+        </div>
+      </article>
+      <article class="card">
+        <h3 class="card__title">Puis-je postuler sans compte ?</h3>
+        <div class="card__body">
+          <p>
+            Non : un compte est nécessaire pour joindre votre CV une seule fois
+            et suivre vos candidatures. L'inscription prend moins de deux
+            minutes.
+          </p>
+        </div>
+      </article>
+      <article class="card">
+        <h3 class="card__title">Comment suivre ma candidature ?</h3>
+        <div class="card__body">
+          <p>
+            Depuis la page
+            <a class="link" href="candidatures.html">Mes candidatures</a>,
+            chaque dossier affiche son statut : envoyée, en cours, entretien,
+            acceptée ou refusée. Vous êtes aussi prévenu par e-mail à chaque
+            changement.
+          </p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
 {% endblock %}

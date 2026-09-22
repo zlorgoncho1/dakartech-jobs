@@ -1,8 +1,864 @@
-{% extends 'base.html' %}
+{% load static %}
 
-{% block titre %} Accueil {% endblock %}
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Accueil — DakarTech Jobs</title>
+    <meta
+      name="description"
+      content="DakarTech Jobs : les offres d'emploi tech au Sénégal, de Dakar à Saint-Louis."
+    />
+    <link rel="icon" href="{% static 'assets/logo.svg' %}" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/theme.css' %}" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Aller au contenu</a>
 
-{% block contenu %}
-    <h1>Trouvez votre prochain poste tech a Dakar</h1>
-    <p class="lede">3 offres actives en ce moment.</p>
-{% endblock %}
+    <!-- ====================================================================
+       HEADER — commun à toutes les pages (→ templates/base.html)
+       ==================================================================== -->
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <a class="brand" href="index.html">
+          <img
+            class="brand__mark"
+            src="{% static 'assets/logo.svg' %}"
+            alt=""
+            width="36"
+            height="36"
+          />
+          <span class="brand__name">DakarTech<strong>Jobs</strong></span>
+        </a>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          data-toggle="nav"
+          aria-controls="site-nav"
+          aria-expanded="false"
+          aria-label="Ouvrir le menu"
+        >
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </button>
+
+        <nav class="site-nav" id="site-nav" aria-label="Navigation principale">
+          <ul class="site-nav__list">
+            <li>
+              <a
+                class="site-nav__link is-active"
+                href="index.html"
+                aria-current="page"
+                >Accueil</a
+              >
+            </li>
+            <li><a class="site-nav__link" href="offres.html">Offres</a></li>
+            <li>
+              <a class="site-nav__link" href="entreprises.html">Entreprises</a>
+            </li>
+            <li><a class="site-nav__link" href="contact.html">Contact</a></li>
+          </ul>
+          <div class="site-nav__actions">
+            <a class="btn btn--ghost" href="connexion.html">Connexion</a>
+            <a class="btn btn--primary" href="inscription.html"
+              >Créer un compte</a
+            >
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ====================================================================
+      {#   CONTENU DE LA PAGE (→ {% block content %}) #}
+       ==================================================================== -->
+    <main id="main">
+      <!-- Hero : fond dégradé « marque », barre spectre à gauche -->
+      <section class="hero on-dark">
+        <div class="container">
+          <span class="kicker">Emploi tech · Sénégal</span>
+          <h1 class="hero__title">
+            Trouvez votre prochain <em>job tech</em> au Sénégal.
+          </h1>
+          <p class="hero__lead">
+            DakarTech Jobs réunit les offres des entreprises qui recrutent des
+            développeurs, data analysts et designers — de Dakar à Saint-Louis.
+          </p>
+
+          {#  <!-- Recherche : en Django, un <form method="get" action="{% url 'liste_offres' %}"> --> #}  
+          <form
+            class="search-bar hero__search"
+            action="offres.html"
+            method="get"
+            role="search"
+          >
+            <label class="search-bar__field">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21-4.3-4.3" />
+              </svg>
+              <span class="sr-only">Poste, technologie ou entreprise</span>
+              <input
+                type="search"
+                name="q"
+                placeholder="Poste, technologie, entreprise…"
+                autocomplete="off"
+              />
+            </label>
+            <label class="search-bar__field search-bar__field--select">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span class="sr-only">Ville</span>
+              <select name="ville">
+                <option value="">Toutes les villes</option>
+                <option value="dakar">Dakar</option>
+                <option value="thies">Thiès</option>
+                <option value="saint-louis">Saint-Louis</option>
+                <option value="diamniadio">Diamniadio</option>
+                <option value="mbour">Mbour</option>
+                <option value="ziguinchor">Ziguinchor</option>
+              </select>
+            </label>
+            <button class="btn btn--primary btn--lg" type="submit">
+              Rechercher
+            </button>
+          </form>
+
+          <div class="hero__chips">
+            <span>Populaires :</span>
+            <a class="chip" href="offres.html?q=django">Django</a>
+            <a class="chip" href="offres.html?q=laravel">Laravel</a>
+            <a class="chip" href="offres.html?q=angular">Angular</a>
+            <a class="chip" href="offres.html?q=nestjs">NestJS</a>
+            <a class="chip" href="offres.html?q=data">Data</a>
+          </div>
+
+          <div class="hero__stats">
+            <div class="stat stat--green">
+              <p class="stat__value">128</p>
+              <p class="stat__label">offres actives</p>
+            </div>
+            <div class="stat stat--blue">
+              <p class="stat__value">36</p>
+              <p class="stat__label">entreprises</p>
+            </div>
+            <div class="stat stat--amber">
+              <p class="stat__value">6</p>
+              <p class="stat__label">villes</p>
+            </div>
+            <div class="stat stat--pink">
+              <p class="stat__value">1&nbsp;240</p>
+              <p class="stat__label">candidats inscrits</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Offres à la une -->
+      <section class="section">
+        <div class="container">
+          <div class="section__head">
+            <div>
+              <span class="kicker">À la une</span>
+              <h2>Dernières offres publiées</h2>
+            </div>
+            <a class="btn btn--outline" href="offres.html">
+              Voir les 128 offres
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+
+          <!-- Une carte par offre -->
+          <div class="grid grid--3">
+            <article
+              class="card card--outlined card--interactive offre-card offre-card--grid"
+            >
+              <div class="avatar avatar--green" aria-hidden="true">Ba</div>
+              <div>
+                <h3 class="offre-card__title">
+                  <a class="stretched-link" href="offre.html"
+                    >Développeur Django</a
+                  >
+                </h3>
+                <p class="offre-card__meta">
+                  <span>Baamtu</span>
+                  <span
+                    ><svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"
+                      />
+                      <circle cx="12" cy="10" r="3" /></svg
+                    >Dakar</span
+                  >
+                </p>
+                <ul class="offre-card__tags">
+                  <li class="badge badge--green">CDI</li>
+                  <li class="badge">Hybride</li>
+                </ul>
+              </div>
+              <div class="offre-card__aside">
+                <p class="offre-card__salary">
+                  750&nbsp;000 <span>FCFA / mois</span>
+                </p>
+                <p class="offre-card__date">Il y a 2 jours</p>
+              </div>
+            </article>
+
+            <article
+              class="card card--outlined card--interactive offre-card offre-card--grid"
+            >
+              <div class="avatar avatar--blue" aria-hidden="true">So</div>
+              <div>
+                <h3 class="offre-card__title">
+                  <a class="stretched-link" href="offre.html"
+                    >Développeur Laravel</a
+                  >
+                </h3>
+                <p class="offre-card__meta">
+                  <span>Sonatel</span>
+                  <span
+                    ><svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"
+                      />
+                      <circle cx="12" cy="10" r="3" /></svg
+                    >Dakar</span
+                  >
+                </p>
+                <ul class="offre-card__tags">
+                  <li class="badge badge--green">CDI</li>
+                  <li class="badge">Sur site</li>
+                </ul>
+              </div>
+              <div class="offre-card__aside">
+                <p class="offre-card__salary">
+                  1&nbsp;200&nbsp;000 <span>FCFA / mois</span>
+                </p>
+                <p class="offre-card__date">Il y a 3 jours</p>
+              </div>
+            </article>
+
+            <article
+              class="card card--outlined card--interactive offre-card offre-card--grid"
+            >
+              <div class="avatar avatar--amber" aria-hidden="true">Ey</div>
+              <div>
+                <h3 class="offre-card__title">
+                  <a class="stretched-link" href="offre.html"
+                    >Développeur NestJS</a
+                  >
+                </h3>
+                <p class="offre-card__meta">
+                  <span>Eyone</span>
+                  <span
+                    ><svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"
+                      />
+                      <circle cx="12" cy="10" r="3" /></svg
+                    >Dakar</span
+                  >
+                </p>
+                <ul class="offre-card__tags">
+                  <li class="badge badge--blue">CDD</li>
+                  <li class="badge">Télétravail</li>
+                </ul>
+              </div>
+              <div class="offre-card__aside">
+                <p class="offre-card__salary">
+                  1&nbsp;200&nbsp;000 <span>FCFA / mois</span>
+                </p>
+                <p class="offre-card__date">Il y a 5 jours</p>
+              </div>
+            </article>
+
+            <article
+              class="card card--outlined card--interactive offre-card offre-card--grid"
+            >
+              <div class="avatar avatar--pink" aria-hidden="true">Ya</div>
+              <div>
+                <h3 class="offre-card__title">
+                  <a class="stretched-link" href="offre.html"
+                    >Développeur Angular</a
+                  >
+                </h3>
+                <p class="offre-card__meta">
+                  <span>Yas</span>
+                  <span
+                    ><svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"
+                      />
+                      <circle cx="12" cy="10" r="3" /></svg
+                    >Dakar</span
+                  >
+                </p>
+                <ul class="offre-card__tags">
+                  <li class="badge badge--green">CDI</li>
+                  <li class="badge">Hybride</li>
+                </ul>
+              </div>
+              <div class="offre-card__aside">
+                <p class="offre-card__salary">
+                  850&nbsp;000 <span>FCFA / mois</span>
+                </p>
+                <p class="offre-card__date">Il y a 6 jours</p>
+              </div>
+            </article>
+
+            <article
+              class="card card--outlined card--interactive offre-card offre-card--grid"
+            >
+              <div class="avatar avatar--sky" aria-hidden="true">Wa</div>
+              <div>
+                <h3 class="offre-card__title">
+                  <a class="stretched-link" href="offre.html">Data Analyst</a>
+                </h3>
+                <p class="offre-card__meta">
+                  <span>Wave</span>
+                  <span
+                    ><svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"
+                      />
+                      <circle cx="12" cy="10" r="3" /></svg
+                    >Dakar</span
+                  >
+                </p>
+                <ul class="offre-card__tags">
+                  <li class="badge badge--amber">Stage</li>
+                  <li class="badge">Sur site</li>
+                </ul>
+              </div>
+              <div class="offre-card__aside">
+                <p class="offre-card__salary">
+                  250&nbsp;000 <span>FCFA / mois</span>
+                </p>
+                <p class="offre-card__date">Il y a 1 semaine</p>
+              </div>
+            </article>
+
+            <article
+              class="card card--outlined card--interactive offre-card offre-card--grid"
+            >
+              <div class="avatar avatar--green" aria-hidden="true">Sn</div>
+              <div>
+                <h3 class="offre-card__title">
+                  <a class="stretched-link" href="offre.html"
+                    >Ingénieur DevOps</a
+                  >
+                </h3>
+                <p class="offre-card__meta">
+                  <span>Sénégal Numérique</span>
+                  <span
+                    ><svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"
+                      />
+                      <circle cx="12" cy="10" r="3" /></svg
+                    >Diamniadio</span
+                  >
+                </p>
+                <ul class="offre-card__tags">
+                  <li class="badge badge--pink">Freelance</li>
+                  <li class="badge">Télétravail</li>
+                </ul>
+              </div>
+              <div class="offre-card__aside">
+                <p class="offre-card__salary">
+                  1&nbsp;500&nbsp;000 <span>FCFA / mois</span>
+                </p>
+                <p class="offre-card__date">Il y a 1 semaine</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Explorer par ville (→ vue offres_par_ville) -->
+      <section class="section section--tinted">
+        <div class="container">
+          <div class="section__head">
+            <div>
+              <span class="kicker">Par ville</span>
+              <h2>Explorer les offres près de chez vous</h2>
+            </div>
+          </div>
+
+          <div class="grid grid--3">
+            <a
+              class="ville-card ville-card--white"
+              href="offres.html?ville=dakar"
+            >
+              <span class="icon-box icon-box--green" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </span>
+              <span class="ville-card__body">
+                <span class="ville-card__name">Dakar</span>
+                <span class="ville-card__count">84 offres</span>
+              </span>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+            <a
+              class="ville-card ville-card--white"
+              href="offres.html?ville=thies"
+            >
+              <span class="icon-box icon-box--blue" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </span>
+              <span class="ville-card__body">
+                <span class="ville-card__name">Thiès</span>
+                <span class="ville-card__count">12 offres</span>
+              </span>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+            <a
+              class="ville-card ville-card--white"
+              href="offres.html?ville=saint-louis"
+            >
+              <span class="icon-box icon-box--amber" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </span>
+              <span class="ville-card__body">
+                <span class="ville-card__name">Saint-Louis</span>
+                <span class="ville-card__count">9 offres</span>
+              </span>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+            <a
+              class="ville-card ville-card--white"
+              href="offres.html?ville=diamniadio"
+            >
+              <span class="icon-box icon-box--pink" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </span>
+              <span class="ville-card__body">
+                <span class="ville-card__name">Diamniadio</span>
+                <span class="ville-card__count">7 offres</span>
+              </span>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+            <a
+              class="ville-card ville-card--white"
+              href="offres.html?ville=mbour"
+            >
+              <span class="icon-box icon-box--sky" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </span>
+              <span class="ville-card__body">
+                <span class="ville-card__name">Mbour</span>
+                <span class="ville-card__count">6 offres</span>
+              </span>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+            <a
+              class="ville-card ville-card--white"
+              href="offres.html?ville=ziguinchor"
+            >
+              <span class="icon-box" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </span>
+              <span class="ville-card__body">
+                <span class="ville-card__name">Ziguinchor</span>
+                <span class="ville-card__count">4 offres</span>
+              </span>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Comment ça marche -->
+      <section class="section">
+        <div class="container">
+          <div class="section__head">
+            <div>
+              <span class="kicker">Simple et rapide</span>
+              <h2>Comment ça marche</h2>
+              <p class="lead">
+                Trois étapes pour passer de la recherche à l'entretien.
+              </p>
+            </div>
+          </div>
+
+          <div class="grid grid--3">
+            <div class="step">
+              <span class="icon-box icon-box--green">1</span>
+              <h3 class="step__title">Créez votre profil</h3>
+              <p>
+                Renseignez vos compétences, votre CV et vos préférences (ville,
+                type de contrat, télétravail).
+              </p>
+            </div>
+            <div class="step">
+              <span class="icon-box icon-box--blue">2</span>
+              <h3 class="step__title">Postulez en un clic</h3>
+              <p>
+                Chaque offre a un formulaire de candidature simple. Votre CV est
+                joint automatiquement.
+              </p>
+            </div>
+            <div class="step">
+              <span class="icon-box icon-box--amber">3</span>
+              <h3 class="step__title">Suivez vos candidatures</h3>
+              <p>
+                Un tableau de bord vous indique l'état de chaque candidature :
+                envoyée, en cours, entretien, acceptée.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Entreprises qui recrutent -->
+      <section class="section section--flush-top">
+        <div class="container">
+          <div class="section__head">
+            <div>
+              <span class="kicker">Ils recrutent</span>
+              <h2>Des entreprises de confiance</h2>
+            </div>
+            <a class="btn btn--ghost" href="entreprises.html">
+              Toutes les entreprises
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path d="m12 5 7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+
+          <div class="logo-row">
+            <a class="logo-row__item" href="entreprise.html"
+              ><span class="avatar avatar--sm avatar--green">Ba</span>Baamtu</a
+            >
+            <a class="logo-row__item" href="entreprise.html"
+              ><span class="avatar avatar--sm avatar--blue">So</span>Sonatel</a
+            >
+            <a class="logo-row__item" href="entreprise.html"
+              ><span class="avatar avatar--sm avatar--amber">Ey</span>Eyone</a
+            >
+            <a class="logo-row__item" href="entreprise.html"
+              ><span class="avatar avatar--sm avatar--pink">Ya</span>Yas</a
+            >
+            <a class="logo-row__item" href="entreprise.html"
+              ><span class="avatar avatar--sm avatar--sky">Wa</span>Wave</a
+            >
+            <a class="logo-row__item" href="entreprise.html"
+              ><span class="avatar avatar--sm avatar--green">Sn</span>Sénégal
+              Numérique</a
+            >
+            <a class="logo-row__item" href="entreprise.html"
+              ><span class="avatar avatar--sm avatar--blue">Ex</span>Expresso</a
+            >
+            <a class="logo-row__item" href="entreprise.html"
+              ><span class="avatar avatar--sm avatar--amber">Ga</span>Gaïndé
+              2000</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- Appel à l'action recruteurs -->
+      <section class="section section--flush-top">
+        <div class="container">
+          <div class="cta-band on-dark">
+            <div>
+              <span class="kicker">Recruteurs</span>
+              <h2>Vous recrutez un profil tech ?</h2>
+              <p>
+                Publiez votre offre en quelques minutes et touchez plus de
+                1&nbsp;200 candidats qualifiés au Sénégal.
+              </p>
+            </div>
+            <div class="cta-band__actions">
+              <a class="btn btn--secondary btn--lg" href="inscription.html"
+                >Publier une offre</a
+              >
+              <a class="btn btn--outline btn--lg" href="contact.html"
+                >Nous contacter</a
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ====================================================================
+       FOOTER — commun à toutes les pages (→ templates/base.html)
+       ==================================================================== -->
+    <footer class="site-footer on-dark">
+      <div class="container site-footer__inner">
+        <div>
+          <a class="brand" href="index.html">
+            <img
+              class="brand__mark"
+              src="assets/logo.svg"
+              alt=""
+              width="36"
+              height="36"
+            />
+            <span class="brand__name">DakarTech<strong>Jobs</strong></span>
+          </a>
+          <p class="site-footer__about">
+            La plateforme d'emploi dédiée aux métiers du numérique au Sénégal.
+            Projet pédagogique réalisé avec Django.
+          </p>
+        </div>
+        <div>
+          <h3 class="site-footer__title">Candidats</h3>
+          <ul class="site-footer__links">
+            <li><a href="offres.html">Toutes les offres</a></li>
+            <li><a href="entreprises.html">Entreprises</a></li>
+            <li><a href="inscription.html">Créer un compte</a></li>
+            <li><a href="candidatures.html">Mes candidatures</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="site-footer__title">Recruteurs</h3>
+          <ul class="site-footer__links">
+            <li><a href="inscription.html">Publier une offre</a></li>
+            <li><a href="contact.html">Nous contacter</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="site-footer__title">À propos</h3>
+          <ul class="site-footer__links">
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Mentions légales</a></li>
+            <li><a href="#">Confidentialité</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__bottom-wrap">
+        <div class="container site-footer__bottom">
+          <span>© 2026 DakarTech Jobs — Dakar Institute of Technology</span>
+          <span class="cluster">
+            <a href="#">Mentions légales</a>
+            <a href="#">Confidentialité</a>
+          </span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/theme.js"></script>
+  </body>
+</html>
